@@ -1,0 +1,317 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.parent {
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.top {
+  margin-right: 0;
+  padding: 0;
+  display: inline-block;
+  width: 90%;
+}
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #4D6306;
+  font-family: Candara;
+  font-weight: bold;
+}
+
+.lowernavbar {
+  overflow: hidden;
+  background-color: #82A021;
+  font-family: Candara;
+  font-weight: bold;
+  white-space: nowrap;
+  display: flex;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 24px 26px;
+  text-decoration:
+    none;
+}
+
+.lowernavbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 24px 26px;
+  text-decoration:
+    none;
+}
+
+/* The dropdown 
+  container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.logo {
+  flex: 1;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  display: inline-block;
+  width: 10%;
+  height: 134px;
+  background-color: #E9EBE0;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 24px 26px;
+  background-color: inherit;
+  font-family:
+    inherit;
+  font-weight: inherit;
+  /* Important for vertical align on mobile phones */
+  margin:
+    0;
+  /* Important for vertical align on mobile phones */
+}
+
+/* Add a 
+  red background color to navbar links on hover */
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: white;
+  color: #4D6306;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display:
+    none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: #5C7609;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links 
+  on hover */
+.dropdown-content a:hover {
+  background-color: #4D6306;
+  color: white;
+}
+
+/* 
+  Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+input,
+button {
+  color: #151811;
+  font-family: Candara;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+#cover {
+
+  width: 20%;
+  margin: 11px;
+  padding: 10px;
+  background-color: #e2e9d9;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px #354716;
+}
+
+form {
+  height: 25px;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+}
+
+input[type="text"]::placeholder {
+  color: #151811;
+  font-family:Candara;
+  font-weight: bold;
+}
+
+.backgnd {
+  background: #BCC4A2;
+  width: 100%;
+  height: 900px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.outerbox {
+  width: 70%;
+  height: 80%;
+  margin: 10px;
+  margin-bottom: 100px;
+  padding: 5px;
+  background: #BCC4A2;
+  color: white;
+  border-radius: 50px;
+  border-width: 6px;
+  border-color:#4D6306;
+  border-style:solid;
+}
+
+table {
+  border:1px;
+  float:left;
+  width:50%;
+  margin-top:10px;
+}
+
+tr {
+  height:80px;
+}
+
+.headline {
+  float:left;
+  font-family: Candara;
+  font-weight: bold;
+  font-size: 26pt;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 50%;
+  float:left;
+}
+
+.input-container-captcha {
+  height: 50px;
+  position: relative;
+  width: 50%;
+  margin-top:10px;
+}
+
+.ic1 {
+  margin-top: 10px;
+  margin-right:40px;
+  margin-bottom: 10px;
+}
+
+.input {
+  background-color: #4D6306;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+.cut {
+  background-color: #BCC4A2;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 76px;
+  
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+  border-style:solid;
+  border-width: 1px;
+  border-color:black;
+}
+
+.placeholder {
+  color: #f4f4f5;
+  font-family: Candara;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:focus ~ .placeholder {
+  color: #112c0ac0;
+}
+
+.checkboxterms {
+  font-family: Candara;
+  font-size:16pt;
+  font-weight: bold;
+}
+
+.submitbttn {
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  width: 130px;
+  padding: 24px 26px;
+  background-color: #4D6306;
+  border-radius:20px;
+  font-family:Candara;
+  font-weight: bold;
+  /* Important for vertical align on mobile phones */
+  margin:
+    0;
+  /* Important for vertical align on mobile phones */
+}
