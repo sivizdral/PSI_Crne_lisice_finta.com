@@ -1,0 +1,188 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}FintaStore{% endblock %}
+{% block content %}
+
+
+
+  <div onload="loadPage()" class="container">
+    <div class="bg-white rounded d-flex align-items-center justify-content-between" id="header"> <button class="btn btn-hide text-uppercase" type="button" data-toggle="collapse" data-target="#filterbar" aria-expanded="false" aria-controls="filterbar" id="filter-btn" > <span class="fas fa-angle-left" id="filter-angle"></span> <span id="btn-txt">Hide filters</span> </button>
+
+        <nav class="navbar navbar-expand-lg navbar-light pl-lg-0 pl-auto"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="mynav" aria-expanded="false" aria-label="Toggle navigation" onclick="chnageIcon()" id="icon"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="mynav">
+                <ul class="navbar-nav d-lg-flex align-items-lg-center">
+                    <li class="nav-item active">
+                      <button class="btn btn-cart text-uppercase" type="button"> <span id="gotocart" onclick="goToCart(this.id)">Go to cart</span> </button></li>
+                    <li class="nav-item d-inline-flex align-items-center justify-content-between mb-lg-0 mb-3">
+
+                        <div id="tokens" class="font-weight-bold mx-2 result">Available tokens: 200</div>
+                    </li>
+                    <li class="nav-item d-lg-none d-inline-flex"> </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="ml-auto mt-3 mr-2">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" onclick="prevPage()"> <a id="prev-page" class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true" class="font-weight-bold">&lt;</span> <span class="sr-only"></span> </a> </li>
+                    <li id="firstitem" class="page-item active" onclick="getFirstPage()"><a id="first-page" class="page-link" href="#">1</a></li>
+                    <li id="seconditem" class="page-item" onclick="getSecondPage()"><a id="second-page" class="page-link" href="#">2</a></li>
+                    <li id="thirditem" class="page-item" onclick="getThirdPage()"><a id="third-page" class="page-link" href="#">3</a></li>
+                    <li class="page-item" onclick="nextPage()"> <a id="next-page" class="page-link" href="#" aria-label="Next"> <span aria-hidden="true" class="font-weight-bold">&gt;</span> <span class="sr-only"></span> </a> </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="content" class="my-5">
+        <div id="filterbar" class="collapse">
+            <div class="box border-bottom">
+                <div class="form-group text-center">
+                            <div class="btn-group" data-toggle="buttons"> <label id = "reset" class="btn btn-success form-check-label active"> <input class="form-check-input" type="radio" onclick="resetFilters()"> Reset </label> <label id="apply" class="btn btn-success form-check-label"><input class="form-check-input" type="radio" onclick="applyFilters()" checked> Apply</label>  </div>
+                    <form id="cartform" action="{% url 'shop' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="cartinput" id="cartinput">
+                        <button type="submit" class="submitbtn" id="submitFilterForm"></button>
+                    </form>
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="box-label text-uppercase d-flex align-items-center">League <button class="btn ml-auto" type="button" data-toggle="collapse" data-target="#inner-box" aria-expanded="false" aria-controls="inner-box" id="out" onclick="outerFilter()"> <span class="fas fa-plus"></span> </button> </div>
+                <div id="inner-box" class="collapse mt-2 mr-1">
+                    <!--<div class="my-1"> <label class="tick">Bundesliga <input type="checkbox" checked="checked"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Premier League <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Serie A <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Superliga <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">LaLiga <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Eredivisie <input type="checkbox" checked> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Ligue 1 <input type="checkbox"> <span class="check"></span> </label> </div>-->
+                    {% for league in leagues %}
+                        <div class="my-1">
+                        <label
+                        class="tick" id="leagueName{{ forloop.counter }}">{{league}}
+                        <input id="leagueSelector{{forloop.counter}}" type="checkbox" onclick="addFilter(this.id)"> <span class="check"></span></label>
+                        </div>
+				    {% endfor %}
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="box-label text-uppercase d-flex align-items-center">Type of product <button class="btn ml-auto" type="button" data-target="#inner-box2" aria-expanded="false" aria-controls="inner-box2"><span class="fas fa-plus"></span></button> </div>
+                <div id="inner-box2" class="collapse mt-2 mr-1">
+                    <!--<div class="my-1"> <label class="tick">Team badge <input type="checkbox" checked="checked"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Team dress <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Emoji <input type="checkbox" checked> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Achievement badge <input type="checkbox"> <span class="check"></span> </label> </div>
+                    <div class="my-1"> <label class="tick">Avatar <input type="checkbox"> <span class="check"></span> </label> </div>-->
+                    {% for type in types %}
+                        <div class="my-1">
+                        <label
+                        class="tick" id="typeName{{ type.idarticletype }}">{{type.name}}
+                        <input id="typeSelector{{type.idarticletype}}" type="checkbox" onclick="addFilter(this.id)"> <span class="check"></span></label>
+                        </div>
+				    {% endfor %}
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-label text-uppercase d-flex align-items-center">price <button class="btn ml-auto" type="button" data-target="#price" aria-expanded="false" aria-controls="price"><span class="fas fa-plus"></span></button> </div>
+                <div id="price">
+                    <div class="middle">
+                        <div class="multi-range-slider" onclick="loadPrice()"> <input type="range" id="input-left" min="0" max="100" value="10"> <input type="range" id="input-right" min="0" max="100" value="50">
+                            <div class="slider">
+                                <div class="track"></div>
+                                <div class="range"></div>
+                                <div class="thumb left"></div>
+                                <div class="thumb right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-2">
+                        <div> <span id="amount-left" class="font-weight-bold"></span> tokens </div>
+                        <div> <span id="amount-right" class="font-weight-bold"></span> tokens </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="products">
+            <div class="row mx-0">
+                {% for link,article in links %}
+                    <div class="col-lg-4 col-md-6 wrapperrr">
+                      <div class="wrapper">
+                        <div class="contain">
+                          <div class="card">
+                          <div class="imgBox">
+                          <img src="{% static link %}" class="productimage">
+                          </div>
+                        </div>
+                          <div class="bottom" id="bottom{{ article.name }}">
+                            <div class="left">
+                              <div class="details">
+                                <h1 id="#leftname">{{ article.name }}</h1>
+                                <p id="productValue{{ forloop.counter }}">{{ article.value }} tokens</p>
+                                  <p class="productleague" id="productLeague{{ forloop.counter }}">{{ article.text }}</p>
+                                  <p class="producttype" id="productType{{ forloop.counter }}">{{ article.idarticletype.name }}</p>
+                              </div>
+                              <div class="buy" id="buy{{ article.name }}" onclick="chosenProduct(this.id)"><i class="material-icons">add_shopping_cart</i></div>
+                            </div>
+                            <div class="right">
+                              <div class="done"><i class="material-icons">done</i></div>
+                              <div class="details">
+                                <h1 id="#rightname">{{ article.name }}</h1>
+                                <p>Added to your cart</p>
+                              </div>
+                              <div class="remove" id="remove{{ article.name }}" onclick="removeProduct(this.id)"><i class="material-icons">clear</i></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+            <div id="shoppingcart">
+            <div class="cartcard">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 cart">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col">
+                                    <h4><b>Shopping Cart</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        {% for link,article in cartlinks %}
+                            <div class="row border-top border-bottom shoppingcartitem" id="scitem{{ article.name }}">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="{% static link %}"></div>
+                                <div class="col">
+                                    <div class="row text-muted">{{ article.idarticletype.name }}</div>
+                                    <div class="row">{{ article.name }}</div>
+                                </div>
+                                <div class="col"> {{ article.value }} tokens &nbsp&nbsp<span class="close">&#10005;</span></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-lg-4 summary">
+                        <div>
+                            <h5><b>Summary</b></h5>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <p id="hiddencartstring" style="color:white">{{ cartstring }}</p>
+                            <div id="itemCounter" class="col" style="padding-left:0;">ITEMS: 0</div>
+                            <div id="totalPriceCounter" class="col text-right">0 tokens</div>
+                        </div>
+                            <p>GIVE CODE</p> <input id="code" placeholder="Enter your code" oninput="inputCode(this.id)">
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div id="finalprice" class="col text-right">0 tokens</div>
+                        </div> <button class="btn">CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+  </div>
+
+{% endblock %}
