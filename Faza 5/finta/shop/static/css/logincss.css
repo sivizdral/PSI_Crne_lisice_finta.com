@@ -1,0 +1,46 @@
+.gradient-custom-2 {
+/* fallback for old browsers */
+background: #fccb90;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #dab521, #b8c91c, #108f1d, #05b01d);
+
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #7cff6b, #0a8270);
+}
+
+@media (min-width: 668px) {
+.gradient-form {
+height: 100vh !important;
+}
+}
+@media (min-width: 669px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+
+#usernameLogin, #passwordLogin, #usernameReg, #passwordReg, #confirmReg {
+    height: 50px;
+    width:100%;
+}
+
+#loginButton {
+    width: 200px;
+}
+
+#loginContainer {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#nameReg, #surnameReg {
+    width: 47%;
+    height: 50px;
+}
+
+#surnameReg {
+    margin-left: 25px;
+}

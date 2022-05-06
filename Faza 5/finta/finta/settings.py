@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'finta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'finta',
+        'NAME': 'fintacom',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
@@ -134,3 +134,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = "/images/"
 MEDIA_ROOT = BASE_DIR
+
+AUTH_USER_MODEL = 'shop.User'

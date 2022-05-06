@@ -1,0 +1,71 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}Register - finta.com{% endblock %}
+{% block content %}
+  <div id="loginContainer" class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <h4 class="mt-1 mb-5 pb-1">Create an account</h4>
+                </div>
+
+                  <p class="mb-0 me-2" style="padding-bottom:20px">{{ greska }}</p>
+                <form method="post">
+                    {% csrf_token %}
+                  <div class="form-outline mb-4" style="display:flex">
+                    <input type="text" id="nameReg" class="form-control" name="name"
+                      placeholder="Name" />
+                      <input type="text" id="surnameReg" class="form-control" name="surname"
+                      placeholder="Surname" />
+                  </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" id="usernameReg" class="form-control" name="username"
+                      placeholder="Username" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="passwordReg" class="form-control" placeholder="Password" name="password"/>
+                  </div>
+
+                    <div class="form-outline mb-4">
+                    <input type="password" id="confirmReg" class="form-control" placeholder="Confirm password" name="confirm"/>
+                  </div>
+                    <input type="checkbox" style="margin-bottom:20px;" name="terms">   I agree to these <a href="#">Terms and conditions</a>
+
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="loginButton">Register</button>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Already have an account?</p>
+                    <button type="button" class="btn btn-outline-success">Log in</button>
+                  </div>
+
+
+
+                </form>
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <img src="../static/images/player.png" width="100%">
+                <h4 class="mb-4">We are more than just a PSI project.</h4>
+                <p class="small mb-0" style="color: white">A small, but powerful team, we are here to help you get
+                all the information about football you ever needed. Enjoy your time on our website, and various
+                rewards await you in our games, so be sure to check them out!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

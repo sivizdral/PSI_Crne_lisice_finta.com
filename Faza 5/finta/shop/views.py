@@ -1,6 +1,10 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect , HttpResponseRedirect
 from .models import *
+from django.contrib import messages
 from django.views import View
+from django.contrib.auth.models import Group
 
 import os
 
@@ -71,3 +75,59 @@ def shop(request):
 
     print('you are : ', request.session.get('email'))
     return render(request, '../templates/shop.html', data)
+
+def login_req(request):
+    greska = ""
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if len(User.objects.filter(username=username)) != 0:
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                messages.info(request, 'Succesful login')
+                return redirect('homepage')
+            else:
+                greska = "The password is incorrect!"
+        else:
+            greska = "This username does not exist!"
+    context = {
+        "greska": greska
+    }
+    return render(request, '../templates/login.html', context)
+
+def logout_req(request):
+    logout(request)
+    return redirect('homepage')
+
+def register(request):
+    greska = ""
+    if request.method == "POST":
+        username = request.POST.get('username')
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        password = request.POST.get('password')
+        confirm = request.POST.get('confirm')
+        terms = request.POST.get('terms')
+
+        if len(User.objects.filter(username=username)) != 0:
+            greska = "This username is already taken!"
+        elif password != confirm:
+            greska = "The password and confirmation are not the same!"
+        elif terms != 'on':
+            greska = "You have to agree with terms and conditions!"
+        else:
+            user = User()
+            user.username = username
+            user.password = make_password(password)
+            user.first_name = name
+            user.last_name = surname
+            user.save()
+            group = Group.objects.get(name='default')
+            user.groups.add(group)
+            login(request, user)
+            return redirect('homepage')
+    context = {
+        'greska': greska
+    }
+    return render(request, '../templates/register.html', context)

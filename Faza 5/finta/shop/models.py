@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -10,7 +11,6 @@ class Article(models.Model):
     text = models.CharField(db_column='Text', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'article'
 
     @staticmethod
@@ -56,7 +56,6 @@ class Articletype(models.Model):
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'articletype'
 
     @staticmethod
@@ -69,7 +68,6 @@ class Championship(models.Model):
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'championship'
 
 
@@ -80,18 +78,16 @@ class Championshipmanagerteam(models.Model):
     rank = models.IntegerField(db_column='Rank')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'championshipmanagerteam'
 
 
 class Comment(models.Model):
     idcomment = models.AutoField(db_column='idComment', primary_key=True)  # Field name made lowercase.
-    iduser = models.ForeignKey('User', models.DO_NOTHING, db_column='idUser')  # Field name made lowercase.
+    username = models.ForeignKey('User', models.DO_NOTHING, db_column='username')  # Field name made lowercase.
     idfixture = models.ForeignKey('Fixture', models.DO_NOTHING, db_column='idFixture')  # Field name made lowercase.
     text = models.CharField(db_column='Text', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'comment'
 
 
@@ -103,7 +99,6 @@ class Fixture(models.Model):
     score = models.CharField(db_column='Score', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'fixture'
 
 
@@ -113,7 +108,6 @@ class League(models.Model):
     country = models.CharField(db_column='Country', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'league'
 
 
@@ -123,13 +117,12 @@ class Managerplays(models.Model):
     idplayer = models.ForeignKey('Player', models.DO_NOTHING, db_column='idPlayer')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'managerplays'
 
 
 class Managerteam(models.Model):
     idmanagerteam = models.AutoField(db_column='idManagerTeam', primary_key=True)  # Field name made lowercase.
-    iduser = models.ForeignKey('User', models.DO_NOTHING, db_column='idUser')  # Field name made lowercase.
+    username = models.ForeignKey('User', models.DO_NOTHING, db_column='username')  # Field name made lowercase.
     offence = models.IntegerField(db_column='Offence')  # Field name made lowercase.
     defence = models.IntegerField(db_column='Defence')  # Field name made lowercase.
     value = models.IntegerField(db_column='Value')  # Field name made lowercase.
@@ -138,18 +131,16 @@ class Managerteam(models.Model):
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'managerteam'
 
 
 class Owns(models.Model):
     idowns = models.AutoField(db_column='idOwns', primary_key=True)  # Field name made lowercase.
-    iduser = models.ForeignKey('User', models.DO_NOTHING, db_column='idUser')  # Field name made lowercase.
+    username = models.ForeignKey('User', models.DO_NOTHING, db_column='username')  # Field name made lowercase.
     idarticle = models.ForeignKey(Article, models.DO_NOTHING, db_column='idArticle')  # Field name made lowercase.
     amount = models.IntegerField(db_column='Amount')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'owns'
 
 
@@ -159,7 +150,6 @@ class Participates(models.Model):
     idleague = models.ForeignKey(League, models.DO_NOTHING, db_column='idLeague')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'participates'
 
 
@@ -173,17 +163,7 @@ class Player(models.Model):
     position = models.CharField(db_column='Position', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'player'
-
-
-class Role(models.Model):
-    idrole = models.AutoField(db_column='idRole', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'role'
 
 
 class Team(models.Model):
@@ -192,25 +172,17 @@ class Team(models.Model):
     country = models.CharField(db_column='Country', max_length=255)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'team'
 
 
-class User(models.Model):
-    iduser = models.AutoField(db_column='idUser', primary_key=True)  # Field name made lowercase.
-    forename = models.CharField(db_column='Forename', max_length=255)  # Field name made lowercase.
-    surename = models.CharField(db_column='Surename', max_length=255)  # Field name made lowercase.
-    password = models.CharField(db_column='Password', max_length=255)  # Field name made lowercase.
-    username = models.CharField(db_column='Username', max_length=255)  # Field name made lowercase.
-    tokens = models.IntegerField(db_column='Tokens')  # Field name made lowercase.
-    gold = models.IntegerField(db_column='Gold')  # Field name made lowercase.
-    silver = models.IntegerField(db_column='Silver')  # Field name made lowercase.
-    bronze = models.IntegerField(db_column='Bronze')  # Field name made lowercase.
-    appearances = models.IntegerField(db_column='Appearances')  # Field name made lowercase.
-    rank = models.IntegerField(db_column='Rank')  # Field name made lowercase.
-    idrole = models.ForeignKey(Role, models.DO_NOTHING, db_column='idRole')  # Field name made lowercase.
+class User(AbstractUser):
+    tokens = models.IntegerField(db_column='Tokens', default=0)  # Field name made lowercase.
+    gold = models.IntegerField(db_column='Gold', default=0)  # Field name made lowercase.
+    silver = models.IntegerField(db_column='Silver', default=0)  # Field name made lowercase.
+    bronze = models.IntegerField(db_column='Bronze', default=0)  # Field name made lowercase.
+    appearances = models.IntegerField(db_column='Appearances', default=0)  # Field name made lowercase.
+    rank = models.IntegerField(db_column='Rank', default=0)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'user'
 
