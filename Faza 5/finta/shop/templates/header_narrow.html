@@ -90,8 +90,15 @@
     </div>
 
     <!-- uros je ovo menjao kako bi lepse izgledalo (dodat je samo okolni div) -->
-    <div style="width: 60%; margin-left: 20%;">
-        {% block content %}{% endblock %}
+    <div class="container-fluid" style="margin-top: 37px;">
+        <div class="row">
+            <div class="col-sm-2" style="background-image: url('../static/images/burgerking.png'); background-repeat: repeat-y; background-size: 100%; min-height: 600px;">
+            </div>
+            <div class="col-sm-8">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-sm-2" style="background-image: url('../static/images/cocacola.jpg'); background-repeat: repeat-y; background-size: 100%; min-height: 600px;">
+        </div>
     </div>
 
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
