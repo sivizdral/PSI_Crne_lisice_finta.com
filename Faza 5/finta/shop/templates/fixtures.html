@@ -1,0 +1,53 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Fixtures - finta.com
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <br/>
+        <form method="post">
+            {% csrf_token %}
+            <b>Date: </b>
+            <input type="date" name="datum">
+            <b> League: </b>
+            <select name="lige">
+                <option value="all">All</option>
+                <option value="uefa_champions_league">UEFA Champions League</option>
+                <option value="world_cup">World Cup</option>
+                <option value="premier_league">Premier League</option>
+                <option value="ligue_1">Ligue 1</option>
+                <option value="laliga">LaLiga</option>
+                <option value="serie_a">Serie A</option>
+                <option value="bundesliga">Bundesliga</option>
+                <option value="superliga">Superliga</option>
+            </select>
+            <input type="submit" value="Search">
+        </form>
+        <br/>
+    </div>
+    <div id="wg-api-football-fixtures"
+        data-host={{ data_host }}
+        data-refresh={{ data_refresh }}
+        data-date={{ data_date }}
+                {% if data_league != "" %}
+                    data-league={{ data_league }}
+                {% endif %}
+        data-team=""
+                {% if data_season != "" %}
+                    data-season={{ data_season }}
+                {% endif %}
+        data-last=""
+        data-next=""
+        data-key= {{ data_key }}
+        data-theme=""
+        data-show-errors="true"
+        class="api_football_loader">
+    </div>
+    <script
+        type="module"
+        src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+    </script>
+{% endblock %}
