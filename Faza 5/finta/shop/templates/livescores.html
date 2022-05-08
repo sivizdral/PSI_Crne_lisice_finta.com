@@ -1,0 +1,22 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Livescores - finta.com
+{% endblock %}
+
+{% block content %}
+    <div id="wg-api-football-livescore"
+         data-host= {{ data_host }}
+         data-refresh= {{ data_refresh }}
+         data-key= {{ data_key }}
+         data-theme=""
+         data-show-errors="false"
+         class="api_football_loader">
+    </div>
+    <script
+        type="module"
+        src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+    </script>
+
+{% endblock %}
