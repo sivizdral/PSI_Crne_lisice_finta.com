@@ -1,0 +1,48 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Search team - finta.com
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center">
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        &nbsp;
+        <input type="submit" value="search">
+    </form>
+    </div>
+    <br>
+    <div style="text-align: center">
+        {% for i in data %}
+            <table style="margin-left: 30%">
+            <tr>
+                <td style="text-align: left">
+                    <image src="{{ i.logo }}" style="width: 100px;height: 100px;"></image> &nbsp;
+                </td>
+                <td style="text-align: right" class="kolona">
+                   <form method="post" action="{% url "team" %}">
+                       {% csrf_token %}
+                        <label style="font-size: 25px;">{{ i.name }}</label>
+                       <input type="hidden" name="id" value="{{ i.id }}" class="teams">
+                   </form>
+                </td>
+            </tr>
+            </table>
+            <br>
+        {% endfor %}
+    </div>
+    <script>
+
+    $(document).ready(function () {
+        $(".teams").hide();
+        $(".kolona").on({
+            'click' : function () {
+                $(this).find('form').submit()
+            }
+        })
+    })
+    </script>
+{% endblock %}
