@@ -1,11 +1,12 @@
 
 .wrapper {
-    width:80%;
-    height: 480px;
-    margin-top:10px;
-    padding:1px 10px;
-    background-color:#17191F;
-    border-radius:1px;
+    float: left;
+    width: 50%;
+    height: auto;
+    margin: 10px;
+    padding: 1px 10px;
+    background-color: #17191F;
+    border-radius: 1px;
 }
 
 .campo {

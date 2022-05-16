@@ -22,6 +22,10 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
 
+    <!-- CSS -->
+    {% block links %}
+    {% endblock %}
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -89,8 +93,14 @@
         </div>
     </div>
 
+    <div class="container-fluid" style="margin-top: 37px;">
+        <div class="row">
+            <div class="col-sm-12" style="min-height: 600px;">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
 
-    {% block content %}{% endblock %}
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
