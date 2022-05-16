@@ -77,4 +77,5 @@ def fixtures(request: HttpRequest):
 
     return render(request=request, template_name="fixtures.html", context=context)
 
-
+def manager(request: HttpRequest):
+    return render(request=request, template_name="manager.html", context={})

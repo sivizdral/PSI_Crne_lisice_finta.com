@@ -1,0 +1,289 @@
+
+.wrapper {
+    width:80%;
+    height: 480px;
+    margin-top:10px;
+    padding:1px 10px;
+    background-color:#17191F;
+    border-radius:1px;
+}
+
+.campo {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 0;
+    margin: 10px auto;
+    padding: 0 0 60% 0;
+    /*background: green;*/
+    /*background-color: rgb(27,31,38);*/
+    background-color: #6b9c58;
+}
+
+.interior, .divisoria,
+.semi1, .semi2,
+.corner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 1px solid #ffffff;
+}
+
+.divisoria:after, .divisoria:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 0;
+    height: 100%;
+    margin-left: .5px;
+    border: 0.5px solid #ffffff;
+}
+.divisoria:before {
+    top: 50%;
+    width: 17%;
+    height: 0;
+    margin: -8% 0 0 -8%;
+    margin-top: calc(-8% - 4px);
+    margin-left: calc(-8% - .5px);
+    padding-bottom: 17%;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.campo:before, .campo:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    margin: -8% 0 0 -1px;
+    display: block;
+    width: 8%;
+    height: 30%;
+    border: 1px solid #ffffff;
+    z-index: 2;
+}
+
+.campo:after {
+    left: auto;
+    right: -2px;
+}
+
+.interior:before, .interior:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin: -16% 0 0 -1px;
+    display: block;
+    width: 16%;
+    height: 55%;
+    /*background: rgb(27,31,38);*/
+    background-color: #6b9c58;
+    border: 1px solid #ffffff;
+}
+
+.interior:after {
+    left: auto;
+    right: 0;
+    margin: -16% -1px 0 0;
+}
+
+.semi2:before {
+    left: auto;
+    right: 12%;
+}
+
+.semi1:after, .semi2:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 16%;
+    height: 0;
+    margin: -8% 0 0 0;
+    padding-bottom: 16%;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+}
+.semi2:after {
+    left: auto;
+    right: 5%;
+}
+
+.position {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 3%;
+    height: 5%;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.position:hover {
+    border: 2px solid #000000;
+}
+
+.gk{
+    top: 48%;
+    left: 2%;
+    background-color: #800000;
+}
+
+.sw {
+    top: 48%;
+    left: 10%;
+    background-color: #ffff00;
+}
+
+.lb {
+    top: 8%;
+    left: 21%;
+    background-color: #0000ff;
+}
+
+.lcb {
+    top: 28%;
+    left: 21%;
+    background-color: #0000ff;
+}
+
+.cb {
+    top: 48%;
+    left: 21%;
+    background-color: #0000ff;
+}
+
+.rcb {
+    top: 68%;
+    left: 21%;
+    background-color: #0000ff;
+}
+
+.rb {
+    top: 88%;
+    left: 21%;
+    background-color: #0000ff;
+}
+
+.lwb {
+    top: 8%;
+    left: 31%;
+    background-color: #ff00ff;
+}
+
+.ldm {
+    top: 28%;
+    left: 36%;
+    background-color: #ff00ff;
+}
+
+.cdm {
+    top: 48%;
+    left: 36%;
+    background-color: #ff00ff;
+}
+
+.rdm {
+    top: 68%;
+    left: 36%;
+    background-color: #ff00ff;
+}
+
+.rwb {
+    top: 88%;
+    left: 31%;
+    background-color: #ff00ff;
+}
+
+.lm {
+    top: 8%;
+    left: 49%;
+    background-color: #00ff00;
+}
+
+.lcm {
+    top: 28%;
+    left: 49%;
+    background-color: #00ff00;
+}
+
+.cm {
+    top: 48%;
+    left: 49%;
+    background-color: #00ff00;
+}
+
+.rcm {
+    top: 68%;
+    left: 49%;
+    background-color: #00ff00;
+}
+
+.rm {
+    top: 88%;
+    left: 49%;
+    background-color: #00ff00;
+}
+
+.lam {
+    top: 28%;
+    left: 63%;
+    background-color: #ffa500;
+}
+
+.cam {
+    top: 48%;
+    left: 63%;
+    background-color: #ffa500;
+}
+
+.ram {
+    top: 68%;
+    left: 63%;
+    background-color: #ffa500;
+}
+
+.lw {
+    top: 8%;
+    left: 76%;
+    background-color: #ff0000;
+}
+
+.ss {
+    top: 48%;
+    left: 76%;
+    background-color: #ff0000;
+}
+
+.rw {
+    top: 88%;
+    left: 76%;
+    background-color: #ff0000;
+}
+
+.ls {
+    top: 28%;
+    left: 88%;
+    background-color: #000000;
+}
+
+.cf {
+    top: 48%;
+    left: 88%;
+    background-color: #000000;
+}
+
+.rs {
+    top: 68%;
+    left: 88%;
+    background-color: #000000;
+}

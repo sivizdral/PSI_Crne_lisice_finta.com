@@ -1,0 +1,58 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Manager - finta.com
+{% endblock %}
+
+{% block links %}
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/manager_football_pitch.js" %}"></script>
+    <link rel="stylesheet" href="{% static 'css/manager_football_pitch.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper" width=100px;">
+        <div class="campo">
+            <div class="semi1"></div>
+            <div class="semi2"></div>
+            <div class="divisoria"></div>
+            <div class="interior"></div>
+            <div class="penalty"></div>
+
+            <div class="gk position"></div>
+
+            <div class="sw position"></div>
+
+            <div class="lb position"></div>
+            <div class="lcb position"></div>
+            <div class="cb position"></div>
+            <div class="rcb position"></div>
+            <div class="rb position"></div>
+
+            <div class="lwb position"></div>
+            <div class="ldm position"></div>
+            <div class="cdm position"></div>
+            <div class="rdm position"></div>
+            <div class="rwb position"></div>
+
+            <div class="lm position"></div>
+            <div class="lcm position"></div>
+            <div class="cm position"></div>
+            <div class="rcm position"></div>
+            <div class="rm position"></div>
+
+            <div class="lam position"></div>
+            <div class="cam position"></div>
+            <div class="ram position"></div>
+
+            <div class="lw position"></div>
+            <div class="ss position"></div>
+            <div class="rw position"></div>
+
+            <div class="ls position"></div>
+            <div class="cf position"></div>
+            <div class="rs position"></div>
+        </div>
+    </div>
+{% endblock %}

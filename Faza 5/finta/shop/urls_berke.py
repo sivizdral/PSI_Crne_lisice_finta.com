@@ -5,4 +5,5 @@ from .views_berke import *
 urlpatterns = [
     path('livescores/', livescores, name='livescores'),
     path('fixtures/', fixtures, name='fixtures'),
+    path('manager/', manager, name='manager'),
 ]
