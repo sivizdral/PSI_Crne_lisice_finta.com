@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.views import View
 from django.contrib.auth.models import Group
 from django.http import HttpRequest
+from django.db.models import Q
 
 import os
 import http.client
@@ -77,5 +78,32 @@ def fixtures(request: HttpRequest):
 
     return render(request=request, template_name="fixtures.html", context=context)
 
+
 def manager(request: HttpRequest):
-    return render(request=request, template_name="manager.html", context={})
+    players = []
+    if request.method == "POST":
+        search = request.POST.get("player")
+        players = Player.objects.filter(Q(forename__icontains=search) |
+                                        Q(surname__icontains=search) | Q(name__icontains=search))
+
+        for player in players:
+            print(player.name)
+    context = {
+        "players": players,
+    }
+    return render(request=request, template_name="manager.html", context=context)
+
+
+def manager_teams(request: HttpRequest, search):
+    context = {
+        "nesto": search,
+    }
+    return render(request=request, template_name="manager_players.html", context=context)
+
+
+def manager_players(request: HttpRequest, search):
+    context = {
+        "nesto": search,
+    }
+    return render(request=request, template_name="manager_players.html", context=context)
+
