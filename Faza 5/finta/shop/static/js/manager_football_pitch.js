@@ -68,4 +68,9 @@ $(document).ready(function() {
         }
     }
 
+
 })
+
+function dodajIgraca() {
+    alert("oh my")
+}

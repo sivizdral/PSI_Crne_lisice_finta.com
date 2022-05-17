@@ -65,8 +65,8 @@
                 </div>
                 <form id="player_form" method="post">
                     {% csrf_token %}
-                    <input type="text" id="player_league" name="player_league"><br/>
-                    <input type="text" id="player" name="player"><br/>
+                    <input type="text" placeholder="League" id="player_league" name="player_league"><br/>
+                    <input type="text" placeholder="Player" id="player" name="player"><br/>
                     <input type="submit" value="Search" id="player_search"><br/>
                 </form>
                 <br/>
@@ -74,22 +74,34 @@
                     <table style="text-align: center;">
                         {% if players != None %}
                             <tr>
-                                <th>Image</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
+                                <th></th>
+                                <th>Name</th>
                                 <th>Age</th>
                                 <th>Team</th>
+                                <th></th>
                             </tr>
                         {% endif %}
                         {% for player in players %}
                             <tr>
                                 <td>
-                                    <img src="{{ player.player.photo }}" style="width: 50px; height: 50px;" alt="Image" class="rounded-circle">
+                                    <img src="{{ player.player.photo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
                                 </td>
-                                <td>{{ player.player.firstname }}</td>
-                                <td>{{ player.player.lastname }}</td>
+                                <td>
+                                    <a href="{% url "manager_player_display" player.player.id %}">
+                                        {{ player.player.name }}
+                                    </a>
+                                </td>
                                 <td>{{ player.player.age }}</td>
-                                <td>{{ player.statistics.0.team.name }}</td>
+                                <td>
+                                    <a href="{% url "manager_team_display" player.statistics.0.team.id %}">
+                                        {{ player.statistics.0.team.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>
