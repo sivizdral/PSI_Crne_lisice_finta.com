@@ -80,14 +80,20 @@ def fixtures(request: HttpRequest):
 
 
 def manager(request: HttpRequest):
-    players = []
+    players = None
     if request.method == "POST":
-        search = request.POST.get("player")
-        players = Player.objects.filter(Q(forename__icontains=search) |
-                                        Q(surname__icontains=search) | Q(name__icontains=search))
+        search_name = request.POST.get("player")
+        search_league = request.POST.get("player_league")
 
-        for player in players:
-            print(player.name)
+        conn.request("GET", "/v3/leagues?search=" + search_league, headers=headers)
+        leagues = json.loads(conn.getresponse().read())["response"]
+
+        players = []
+        for i in range(min(len(leagues), 5)):
+            conn.request("GET", "/v3/players?league=" + str(leagues[i]["league"]["id"]) +
+                         "&search=" + search_name, headers=headers)
+            players.extend(json.loads(conn.getresponse().read())["response"])
+        players = players[:10]
     context = {
         "players": players,
     }

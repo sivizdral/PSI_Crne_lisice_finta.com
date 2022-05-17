@@ -21,7 +21,15 @@ $(document).ready(function() {
             pretraziIgraca($(this))
         }})
         $("#player").on({change: function() {
-            if (previous_item_id !== "" && $(this).val().length >= 4) {
+            if (previous_item_id !== "" && $(this).val().length >= 4 && $("#player_league").val().length >= 4) {
+                $("#player_search").attr("disabled", false)
+            }
+            else {
+                $("#player_search").attr("disabled", true)
+            }
+        }})
+        $("#player_league").on({change: function() {
+            if (previous_item_id !== "" && $(this).val().length >= 4 && $("#player").val().length >= 4) {
                 $("#player_search").attr("disabled", false)
             }
             else {
@@ -50,9 +58,9 @@ $(document).ready(function() {
 
             previous_item = item
             previous_item_id = item.attr("id")
-            $("#position_name").html("Search for at " + previous_item_id +
-                " position (at least 4 letters):").css("color", "black")
-            if ($("#player").val().length >= 4) {
+            $("#position_name").html("Search for a player at " + previous_item_id +
+                " position (league and name, at least 4 letters each, no spaces):").css("color", "black")
+            if ($("#player").val().length >= 4 && $("#player_league").val().length >= 4) {
                 $("#player_search").attr("disabled", false)
             }
 
