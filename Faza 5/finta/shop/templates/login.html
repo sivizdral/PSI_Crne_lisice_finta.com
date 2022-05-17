@@ -1,6 +1,10 @@
 {% extends 'header.html' %}
 {% load static %}
 
+{% block cssjs %}
+    <link rel="stylesheet" href="{% static 'css/logincss.css' %}">
+{% endblock %}
+
 {% block title %}Login - finta.com{% endblock %}
 {% block content %}
   <div id="loginContainer" class="container py-5 h-100">
@@ -35,7 +39,7 @@
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Don't have an account?</p>
-                    <button type="button" class="btn btn-outline-success">Create new</button>
+                    <button type="button" class="btn btn-outline-success" onclick="window.open('{% url 'register' %}','_self')">Create new</button>
                   </div>
 
                 </form>

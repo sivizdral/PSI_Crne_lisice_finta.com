@@ -49,8 +49,9 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class=""><a href="#"><span>Matches</span></a></li>
-                <li class="has-children">
+                <li class=""><a href="{% url 'fixtures' %}"><span>Fixtures</span></a></li>
+                <li class=""><a href="{% url 'livescores' %}"><span>Livescores</span></a></li>
+                <!--<li class="has-children">
                   <a href="#"><span>Championships</span></a>
                   <ul class="dropdown arrow-top">
                     <li><a href="#">Premier League</a></li>
@@ -60,10 +61,9 @@
                     <li><a href="#">Serie A</a></li>
                     <li><a href="#">Eredivisie</a></li>
                     <li><a href="#">Ligue 1</a></li>
-                  </ul>
-                </li>
-                <li><a href="#"><span>Teams</span></a></li>
-                <li><a href="#"><span>Stats</span></a></li>
+                  </ul>-->
+                <li><a href="{% url 'teamsearch' %}"><span>Teams</span></a></li>
+                <li><a href="{% url 'stats' %}"><span>Stats</span></a></li>
                 <li><a href="#"><span>Finta Manager</span></a></li>
                 <li><a href="#"><span>FintaChamps</span></a></li>
                   {% if user.is_authenticated %}
