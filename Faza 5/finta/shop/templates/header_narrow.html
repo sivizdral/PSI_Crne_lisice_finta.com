@@ -22,6 +22,10 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
 
+    <!-- CSS -->
+    {% block links %}
+    {% endblock %}
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
