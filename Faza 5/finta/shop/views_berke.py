@@ -92,17 +92,17 @@ def manager(request: HttpRequest):
     players = None
     if request.method == "POST":
         search_name = request.POST.get("player")
-        search_league = request.POST.get("player_league")
+        search_team = request.POST.get("player_team")
 
-        conn.request("GET", "/v3/leagues?search=" + search_league, headers=headers)
-        leagues = json.loads(conn.getresponse().read())["response"]
+        conn.request("GET", "/v3/teams?search=" + search_team, headers=headers)
+        teams = json.loads(conn.getresponse().read())["response"]
 
         players = []
-        for i in range(min(len(leagues), 5)):
-            conn.request("GET", "/v3/players?league=" + str(leagues[i]["league"]["id"]) +
+        for i in range(min(len(teams), 15)):
+            conn.request("GET", "/v3/players?team=" + str(teams[i]["team"]["id"]) +
                          "&search=" + search_name, headers=headers)
             players.extend(json.loads(conn.getresponse().read())["response"])
-        players = players[:10]
+        players = players[:15]
     context = {
         "players": players,
     }
