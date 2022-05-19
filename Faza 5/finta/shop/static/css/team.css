@@ -1,0 +1,27 @@
+body {
+    background-image: url("../images/bgbg.jpg") !important;
+}
+
+.searchfields {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(10px);
+    width: 60%;
+    padding-top: 20px;
+    color: honeydew;
+}
+
+.searchcontent {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(10px);
+    width: 60%;
+    margin-left: 20%;
+    color: honeydew;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+
+.col-sm-2 {
+    background-size: 0 !important;
+}
+
+
