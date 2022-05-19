@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block content %}
-    <div style="text-align: center;">
+    <div style="display:flex; width:100%">
         <br/>
-        <form method="post">
+        <form method="post" style="width:100%; display:flex">
             {% csrf_token %}
-            <b>Date: </b>
-            <input type="date" name="datum">
-            <b> League: </b>
-            <select name="lige">
+            <b style="margin-left:8%; margin-right: 2%; margin-top:5px; font-size: 18px">Date: </b>
+            <input type="date" name="datum" class="form-select" style="width:30%; height: 40px;margin-right:40px">
+            <b style="margin-left:4%; margin-right: 2%; margin-top:5px; font-size: 18px"> League: </b>
+            <select name="lige" class="form-select" style="width:30%; height: 40px; margin-right:40px">
                 <option value="all">All</option>
                 <option value="uefa_champions_league">UEFA Champions League</option>
                 <option value="world_cup">World Cup</option>
@@ -24,7 +24,7 @@
                 <option value="bundesliga">Bundesliga</option>
                 <option value="superliga">Superliga</option>
             </select>
-            <input type="submit" value="Search">
+            <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width:15%;" type="submit" value="Search">
         </form>
         <br/>
     </div>

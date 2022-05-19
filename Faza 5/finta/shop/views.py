@@ -115,8 +115,18 @@ def register(request):
         password = request.POST.get('password')
         confirm = request.POST.get('confirm')
         terms = request.POST.get('terms')
+        picture = request.FILES.get('picture')
+        print(picture)
 
-        if len(User.objects.filter(username=username)) != 0:
+        if len(name) == 0:
+            greska = "Name cannot be empty!"
+        elif len(surname) == 0:
+            greska = "Surname cannot be empty!"
+        elif len(username) == 0:
+            greska = "Username cannot be empty!"
+        elif len(password) == 0:
+            greska = "Password cannot be empty!"
+        elif len(User.objects.filter(username=username)) != 0:
             greska = "This username is already taken!"
         elif password != confirm:
             greska = "The password and confirmation are not the same!"

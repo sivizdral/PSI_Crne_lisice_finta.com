@@ -20,7 +20,7 @@
                 </div>
 
                   <p class="mb-0 me-2" style="padding-bottom:20px">{{ greska }}</p>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                   <div class="form-outline mb-4" style="display:flex">
                     <input type="text" id="nameReg" class="form-control" name="name"
@@ -41,6 +41,13 @@
                     <div class="form-outline mb-4">
                     <input type="password" id="confirmReg" class="form-control" placeholder="Confirm password" name="confirm"/>
                   </div>
+
+                    <div class="form-outline mb-4">
+
+                    <input type="file" id="pictureReg" class="form-control" name="picture" accept=".png, .jpg"/>
+                        Insert picture
+                  </div>
+
                     <input type="checkbox" style="margin-bottom:20px;" name="terms">   I agree to these <a href="#">Terms and conditions</a>
 
                   <div class="text-center pt-1 mb-5 pb-1">
