@@ -5,23 +5,28 @@
     Team - finta.com
 {% endblock %}
 
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/player.css' %}">
+{% endblock %}
+
 {% block content %}
     <div style="text-align: center;">
     <h1>{{ info.name }}</h1>
     <img src="{{ info.photo }}" style="width: 100px; height: 100px; margin-bottom: 10px;" class="rounded-circle">
     </div>
-        <div style="text-align: center; width: 100%; background-color: white;">
-        <ul class="nav nav-pills">
-            <li class="nav-item" id="li1" name="li1" onclick="info()">
-                <a class="nav-link active" href="#" id="a1">Info</a>
+        <div style="text-align: center;">
+        <ul class="nav nav-pills" style="text-align: center; width: 25%; background: rgba(180, 180, 154, 0.267); backdrop-filter: blur(15px); margin-left:37.5%">
+            <li class="nav-item" id="li1" name="li1" onclick="info()" style="width:50%;">
+                <a class="nav-link active" href="#" id="a1" style="color: honeydew !important">Info</a>
             </li>
-            <li class="nav-item" id="li2" name="li2" onclick="statistics()">
-                <a class="nav-link" href="#" id="a2">Statistics</a>
+            <li class="nav-item" id="li2" name="li2" onclick="statistics()" style="width:50%;">
+                <a class="nav-link" href="#" id="a2" style="color: honeydew !important">Statistics</a>
             </li>
         </ul>
         </div>
+    <br>
     <div id="info">
-        <table class="table">
+        <table class="table playercontent">
             <tr>
                 <th style="text-align: left; vertical-align: middle;">Team</th>
                 <td style="text-align: right;">{{ info.team }} <img src="{{ info.logo }}" style="width: 50px; height: 50px;" class="rounded-circle"></td>
@@ -60,7 +65,7 @@
     <div id="statistics">
         <form name="statsForm" id="statsForm">
             <div class="dropdown" style="text-align: center;">
-                <select id="selected" class="dropdown" style="width: 200px;" onchange="promeni()">
+                <select id="selected" class="dropdown form-select" style="width: 200px; margin-left: 40%" onchange="promeni()">
                     {% for l in statistics %}
                         <option value="{{ l.leagueId }} {{ l.leagueLogo }} {{ l.appearences }} {{ l.lineups }} {{ l.in }} {{ l.minutes }} {{ l.rating }} {{ l.totalshots }} {{ l.onshots }} {{ l.goals }} {{ l.assists }} {{ l.saves }} {{ l.passes }} {{ l.keypasses }} {{ l.tackels }} {{ l.totalduels }} {{ l.winduels }} {{ l.dribbles }} {{ l.yellowcards }} {{ l.redcards }} {{ l.scorepenalty }} {{ l.missedpenalty }}">
                             {{ l.leagueName }}
@@ -75,7 +80,8 @@
                 </kdb>-->
             </div>
         </form>
-        <div class="drugi"></div>
+        <br>
+        <div class="drugi playercontent"></div>
     </div>
     <script>
         $(document).ready(function () {
@@ -121,7 +127,8 @@
             })
             let table = $("<table></table>").addClass("table");
             table.css({
-                "margin-bottom": "50px"
+                "margin-bottom": "50px",
+                "color":"honeydew"
             })
             let btable = $("<tbody></tbody>");
 

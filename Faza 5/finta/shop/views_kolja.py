@@ -136,6 +136,8 @@ def teamsearch(request):
                 "logo": d["team"]["logo"],
                 "id": d["team"]["id"]
             })
+        if (len(podaci) > 6):
+            podaci = podaci[:6]
         context = {
             "form": form,
             "data": podaci,
