@@ -22,6 +22,10 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'css/headercss.css' %}">
 
+    {% block links %}
+
+    {% endblock %}
+
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -68,7 +72,7 @@
                 <li><a href="#"><span>FintaChamps</span></a></li>
                   {% if user.is_authenticated %}
                 <li><a href="#"><span>FintaStore</span></a></li>
-                <li><a href="#"><span>My profile</span></a></li>
+                <li><a href="{% url 'myprofile' %}"><span>My profile</span></a></li>
                       <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
                   {% else %}
                       <li><a href="{% url 'login' %}"><span>Login</span></a></li>

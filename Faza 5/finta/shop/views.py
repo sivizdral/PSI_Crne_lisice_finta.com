@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect , HttpResponseRedirect
@@ -10,7 +12,8 @@ import os
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
+
 
 class Index(View):
 
@@ -76,6 +79,26 @@ def shop(request):
     print('you are : ', request.session.get('email'))
     return render(request, '../templates/shop.html', data)
 
+def change_coins(request: HttpRequest):
+    myuser = User.objects.get(pk = request.user.id)
+
+    dateNow = datetime.datetime.now()
+    dateReg = myuser.date_joined
+    date_1 = f"{dateNow.day}/{dateNow.month}/{dateNow.year} {dateNow.hour}:{dateNow.minute}:{dateNow.second}"
+    date_2 = f"{dateReg.day}/{dateReg.month}/{dateReg.year} {dateReg.hour}:{dateReg.minute}:{dateReg.second}"
+    date_format_str = '%d/%m/%Y %H:%M:%S'
+    start = datetime.datetime.strptime(date_2, date_format_str)
+    end = datetime.datetime.strptime(date_1, date_format_str)
+
+    difference = (end - start).total_seconds()
+
+    need_to_have = int(difference // 60) * 100;
+    have = myuser.tokens_given
+
+    myuser.tokens_given = need_to_have
+    myuser.tokens += need_to_have - have;
+    myuser.save()
+
 def login_req(request):
     greska = ""
     if request.method == "POST":
@@ -86,6 +109,7 @@ def login_req(request):
             if user:
                 login(request, user)
                 messages.info(request, 'Succesful login')
+                change_coins(request)
                 return redirect('homepage')
             else:
                 greska = "The password is incorrect!"
