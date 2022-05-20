@@ -1,0 +1,87 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block cssjs %}
+    <link rel="stylesheet" href="{% static 'css/statscss.css' %}">
+    <script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}
+
+{% block title %}Statistics{% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-lg-8 col-sm-12" style="margin-right:10px; margin-left:10px">
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex align-items-center justify-content-center">
+                    <select class="form-select" style="width:30%; margin-right:40px" name="league">
+                        <option value="all">All</option>
+                        <option value="uefa_champions_league">UEFA Champions League</option>
+                        <option value="world_cup">World Cup</option>
+                        <option value="premier_league">Premier League</option>
+                        <option value="ligue_1">Ligue 1</option>
+                        <option value="laliga">LaLiga</option>
+                        <option value="serie_a">Serie A</option>
+                        <option value="bundesliga">Bundesliga</option>
+                        <option value="superliga">Superliga</option>
+                    </select>
+                    <input type="text" id="team" class="form-control" name="team"
+                      placeholder="Team" style="width:30%; margin-right:40px"/>
+                    <select class="form-select" style="width:30%; margin-right:40px" name="season">
+                          <option selected value="2022">2022</option>
+                          <option value="2021">2021</option>
+                          <option value="2020">2020</option>
+                          <option value="2019">2019</option>
+                            <option value="2020">2018</option>
+                          <option value="2019">2017</option>
+                            <option value="2020">2016</option>
+                          <option value="2019">2015</option>
+                    </select>
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="search" style="width:15%; margin-top:15px">Search</button>
+                 </div>
+            </form>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+    <div class="row" style="margin-bottom:20px">
+
+        <div class="col-lg-2">
+
+        </div>
+
+        <div class="col-lg-8 col-sm-12 resultbox">
+            <div id="wg-api-football-standings"
+             data-host={{ data_host }}
+             data-league="{{ data_league }}"
+             data-team="{{ data_team }}"
+             data-season={{ data_season }}
+             data-key={{ data_key }}
+             data-theme="grey"
+             data-show-errors="false"
+             class="api_football_loader">
+
+            </div>
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/football/1.1.8/widget.js">
+        </script>
+        </div>
+
+        <div class="col-lg-2">
+
+        </div>
+
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

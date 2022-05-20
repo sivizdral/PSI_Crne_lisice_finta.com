@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+#headerrow {
+  margin-right:0 !important;
+  margin-left: 0 !important;
+}
+
 body {
   font-family: "Poppins";
   background-color: #fff;
@@ -62,6 +67,11 @@ a {
 
 #menuicon {
   float:right !important;
+}
+
+.api_football_modal_content {
+  z-index: 3000;
+  margin-top: 200px !important;
 }
 
 .site-navbar {

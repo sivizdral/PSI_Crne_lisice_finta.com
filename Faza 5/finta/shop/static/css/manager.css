@@ -1,0 +1,21 @@
+#player {
+    margin-left: 50px;
+    margin-top: 10px;
+}
+#player_team {
+    margin-left: 50px;
+    margin-top: 10px;
+}
+#player_search {
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+#position_name {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+table td {
+    padding: 10px;
+}

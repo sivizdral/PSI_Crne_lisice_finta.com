@@ -1,6 +1,13 @@
 {% extends 'header.html' %}
 {% load static %}
 
+{% block cssjs %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+    <script src="{% static 'js/scriptshop.js' %}"></script>
+
+{% endblock %}
+
 {% block title %}FintaStore{% endblock %}
 {% block content %}
 
@@ -16,7 +23,7 @@
                       <button class="btn btn-cart text-uppercase" type="button"> <span id="gotocart" onclick="goToCart(this.id)">Go to cart</span> </button></li>
                     <li class="nav-item d-inline-flex align-items-center justify-content-between mb-lg-0 mb-3">
 
-                        <div id="tokens" class="font-weight-bold mx-2 result">Available tokens: 200</div>
+                        <div id="tokens" class="font-weight-bold mx-2 result">Available tokens: {{ user.tokens }}</div>
                     </li>
                     <li class="nav-item d-lg-none d-inline-flex"> </li>
                 </ul>
@@ -155,7 +162,7 @@
                                     <div class="row text-muted">{{ article.idarticletype.name }}</div>
                                     <div class="row">{{ article.name }}</div>
                                 </div>
-                                <div class="col"> {{ article.value }} tokens &nbsp&nbsp<span class="close">&#10005;</span></div>
+                                <div class="col"> {{ article.value }} tokens</div>
                             </div>
                         </div>
                         {% endfor %}
@@ -165,16 +172,24 @@
                             <h5><b>Summary</b></h5>
                         </div>
                         <hr>
-                        <div class="row">
-                            <p id="hiddencartstring" style="color:white">{{ cartstring }}</p>
-                            <div id="itemCounter" class="col" style="padding-left:0;">ITEMS: 0</div>
-                            <div id="totalPriceCounter" class="col text-right">0 tokens</div>
-                        </div>
+                        <form method="post" id="checkoutform">
+                            {% csrf_token %}
+                            <div class="row">
+                                <p id="hiddencartstring" style="color:white">{{ cartstring }}</p>
+                                <div id="itemCounter" class="col" style="padding-left:0;">ITEMS: 0</div>
+                                <div id="totalPriceCounter" class="col text-right">0 tokens</div>
+                            </div>
                             <p>GIVE CODE</p> <input id="code" placeholder="Enter your code" oninput="inputCode(this.id)">
-                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
-                            <div id="finalprice" class="col text-right">0 tokens</div>
-                        </div> <button class="btn">CHECKOUT</button>
+                            <div id="finalPriceCounter" class="col text-right">0 tokens</div>
+                            </div>
+                            <div class="row" id="nocash" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0; display: none">
+                                <h5><b>Not enough tokens!</b></h5>
+                            </div>
+                            <button type="submit" style="display:none"></button>
+                        </form>
+                            <button class="btn" onclick="checkout()">CHECKOUT</button>
                     </div>
                 </div>
             </div>

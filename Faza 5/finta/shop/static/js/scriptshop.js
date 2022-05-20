@@ -395,6 +395,7 @@ function chosenProduct(id) {
     document.getElementById(scitemid).style.display = "block";
     document.getElementById("itemCounter").innerText = "ITEMS: " + (cartProducts.length - 1);
     document.getElementById("totalPriceCounter").innerText = "" + totalCartValue + " tokens";
+    document.getElementById("finalPriceCounter").innerText = "" + totalCartValue + " tokens";
 }
 
 function removeProduct(id) {
@@ -409,11 +410,14 @@ function removeProduct(id) {
     elem.classList.remove("clicked");
     document.getElementById("itemCounter").innerText = "ITEMS: " + (cartProducts.length - 1);
     document.getElementById("totalPriceCounter").innerText = "" + totalCartValue + " tokens";
+    document.getElementById("finalPriceCounter").innerText = "" + totalCartValue + " tokens";
 }
 
 let clicked = 0;
+let finalValue = totalCartValue;
 
 function goToCart(id) {
+    finalValue = totalCartValue;
     if (!clicked) {
         cards = document.getElementsByClassName("wrapperrr");
         number = cards.length;
@@ -434,18 +438,34 @@ function goToCart(id) {
 
 }
 
-let finalValue = 0;
+
 
 function inputCode(id) {
     let codeElem = document.getElementById(id);
     let discountCode = codeElem.innerText;
     finalValue = totalCartValue;
-    if (discountCode == "iknowjs") {
+    if (discountCode == "ogrizovic") {
+        finalValue = totalCartValue * 0.8;
+    } else if (discountCode == "dp") {
         finalValue = totalCartValue * 0.7;
-    } else if (discountCode == "koljaSvajcarac") {
+    } else if (discountCode == "tasha") {
         finalValue = totalCartValue * 0.6;
+    } else if (discountCode == "drazen") {
+        finalValue = totalCartValue * 0.0;
+    } else if (discountCode == "bojic") {
+        finalValue = totalCartValue * 1.5;
     }
-    document.getElementById("finalprice").innerText = "" + finalValue + " tokens";
+    document.getElementById("finalPriceCounter").innerText = "" + finalValue + " tokens";
+}
+
+function checkout() {
+    let tokens = parseInt(document.getElementById("tokens").innerText.replace("Available tokens: ",""));
+    if (finalValue > tokens) {
+        document.getElementById("nocash").style.display = "block";
+    } else {
+        document.getElementById("nocash").style.display = "none";
+        document.getElementById("checkoutform").submit();
+    }
 }
 
 

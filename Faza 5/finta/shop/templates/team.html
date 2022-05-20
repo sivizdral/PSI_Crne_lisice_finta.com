@@ -1,0 +1,307 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Team - finta.com
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/teamalone.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="searchfields" style="margin-top: 10px; text-align: center;display:flex; justify-content: center">
+    <h1 style="padding-top: 25px">{{ name }}</h1> &nbsp;
+    <image src="{{ logo }}" style="width: 100px; height: 100px; border-radius: 50%;"></image>
+    </div>
+    <br>
+    <div style="text-align: center; width: 25%; background: rgba(180, 180, 154, 0.267); backdrop-filter: blur(15px); margin-left:37.5%">
+        <ul class="nav nav-pills">
+            <li class="nav-item" id="li2" name="li2" style="width:30%;">
+                <a class="nav-link active" href="#" id="a2" style="color: honeydew !important">Stats</a>
+            </li>
+            <li class="nav-item" id="li3" name="li3" style="width:40%">
+                <a class="nav-link" href="#" id="a3" style="color: honeydew !important">Players</a>
+            </li>
+            <li class="nav-item" id="li1" name="li1" style="width:30%">
+                <a class="nav-link" href="#" id="a1" style="color: honeydew !important">Info</a>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div name="info" id="info">
+        <table style="font-size: 18px; border-spacing: 6px; vertical-align: center; " class="table">
+            <tr>
+                <th style="text-align: left; padding-left: 15px">Country </th>
+                <td style="text-align: right; padding-right: 15px">{{ country }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-left: 15px">City </th>
+                <td style="text-align: right;padding-right: 15px">{{ city }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-left: 15px">Founded </th>
+                <td style="text-align: right;padding-right: 15px">{{ founded }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-left: 15px">Stadium </th>
+                <td style="text-align: right;padding-right: 15px">{{ stadion }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-left: 15px">Stadium capacity </th>
+                <td style="text-align: right;padding-right: 15px">{{ capacity }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-top: 20px;  padding-left: 15px; border-bottom: 0px !important">Coach </th>
+                <td style="text-align: right;border-bottom: 0px !important;padding-right: 15px">
+                    {{ coach }}, {{ nationality }} <img src="{{ coachphoto }}" style="width: 50px; height: 50px;" class="rounded-circle">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="stats">
+        <form name="statsForm" id="statsForm">
+            <div class="dropdown" style="text-align: center">
+                <select id="selected" class="dropdown form-select" style="width: 200px; margin-left: 40%" onchange="promeni()">
+                    {% for l in stats %}
+                        <option value="{{ l.leagueId }} {{ l.leagueLogo }} {{ l.leagueCountry }} {{ l.form }} {{ l.homeplayed }} {{ l.awayplayed }} {{ l.totalplayed }} {{ l.homewins }} {{ l.awaywins }} {{ l.totalwins }} {{ l.homedraws }} {{ l.awaydraws }} {{ l.totaldraws }} {{ l.homeloses }} {{ l.awayloses }} {{ l.totalloses }} {{ l.goalsforhome }} {{ l.goalsforaway }} {{ l.goalsfortotal }} {{ l.goalsagainsthome }} {{ l.goalsagainstaway }} {{ l.goalsagainsttotal }} {{ l.goalsaverageforhome }} {{ l.goalsaverageforaway }} {{ l.goalsaveragefortotal }} {{ l.goalsaverageagainsthome }} {{ l.goalsaverageagainstaway }} {{ l.goalsaverageagainsttotal }} {{ l.cleansheethome }} {{ l.cleansheetaway }} {{ l.cleansheettotal }} {{ l.penaltyscored }} {{ l.penaltymissed }} {{ l.penaltytotal }}">
+                            {{ l.leagueName }}
+                            {% if l.leagueCountry %}
+                                ({{ l.leagueCountry }})
+                            {% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+                <br>
+                <!--<kdb style="background-color: blue; border-radius: 2px;padding: 2px; border: 1px solid black;" onclick="statistika()">
+                    <label style="color: white">
+                        Find Statistics
+                    </label>
+                </kdb>-->
+            </div>
+        <div class="drugi"></div>
+        </form>
+    </div>
+    <div id="players" style="text-align: center">
+        <table class="table" style="text-align: left">
+            <tr>
+                <th style="padding-left:15px">
+                    Name
+                </th>
+                <th>
+                    Position
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Age
+                </th>
+            </tr>
+            {% for p in players %}
+                <tr>
+                    <td class="igrac" style="padding-left:15px">
+                        <img src="{{ p.playerPhoto }}" style="width: 50px; height: 50px;" class="rounded-circle">
+                        {{ p.playerName }}
+                    </td>
+                    <td style="vertical-align: middle;">
+                        {{ p.playerPosition }}
+                    </td>
+                    <td style="vertical-align: middle;">
+                        {{ p.playerNumber }}
+                    </td>
+                    <td style="vertical-align: middle;">
+                        {{ p.playerAge }}
+                    </td>
+                    <form method="post" action="{% url "player" %}">
+                        {% csrf_token %}
+                        <input type="submit" name="dugme" value="{{ p.playerId }}" class="dugme">
+                        <input type="hidden" name="igrac" value="{{ p.playerId }}">
+                    </form>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".dugme").hide();
+            $("#info").hide();
+            $("#stats").show();
+            $("#players").hide();
+            $(".nav-item").click(function () {
+                let className = $(this).attr("name");
+                let a1 = $("li1").find("a");
+                let a2 = $("li2").find("a");
+                let a3 = $("li3").find("a");
+
+                if ($("#info").is(":visible")) {
+                    $("#info").hide();
+                }
+                if ($("#stats").is(":visible")) {
+                    $("#stats").hide();
+                }
+                if ($("#players").is(":visible")) {
+                    $("#players").hide();
+                }
+                if ($("#a1").hasClass("active")) {
+                    $("#a1").removeClass("active");
+                }
+                if ($("#a2").hasClass("active")) {
+                    $("#a2").removeClass("active");
+                }
+                if ($("#a3").hasClass("active")) {
+                    $("#a3").removeClass("active");
+                }
+                if (className=="li1") {
+                    $("#info").show();
+                }
+                if (className=="li2") {
+                    $("#stats").show();
+                }
+                if (className=="li3") {
+                    $("#players").show();
+                }
+                $(this).find("a").addClass("active");
+            })
+
+            $(".igrac").on({
+                'click': function() {
+                    $(this).parent().find("form").submit();
+                }
+            })
+
+            promeni();
+        })
+
+
+        function promeni() {
+            let str = [];
+            str = $("#selected option:selected").val().split(" ");
+            $(".drugi").empty();
+            let div = $("<div></div>");
+            let h1 = $("<h1></h1>").append($("#selected option:selected").text());
+            h1.css({
+                "margin-top": "10px",
+                "color": "honeydew",
+                "margin-right":"20px"
+            })
+            div.css({
+                "display":"flex",
+                "justify-content":"center"
+            })
+            div.append(h1);
+            div.append("<img src=" + str[1] +"></img>");
+            div.find("img").css({
+                'width': '60px',
+                'heigth': '60px'
+            })
+            div.css({
+                'text-align':'center'
+            })
+            let table = $("<table></table>").addClass("table");
+            table.css({
+                "margin-bottom": "50px"
+            })
+            let thead = $("<thead></thead>");
+            let row = $("<tr></tr>");
+            row.append("<th scope='col'>Stats</th>");
+            row.append("<th scope='col'>Home</th>");
+            row.append("<th scope='col'>Away</th>");
+            row.append("<th scope='col'>Total</th>");
+            thead.append(row);
+            let tbody = $("<tbody></tbody>");
+            let row1 = $("<tr></tr>");
+            row1.append("<th scope='row'>Games played</th>");
+            row1.append("<td>"+str[4]+"</td>");
+            row1.append("<td>"+str[5]+"</td>");
+            row1.append("<td>"+str[6]+"</td>");
+            let row2 = $("<tr></tr>");
+            row2.append("<th scope='row'>Wins</th>");
+            row2.append("<td>"+str[7]+"</td>");
+            row2.append("<td>"+str[8]+"</td>");
+            row2.append("<td>"+str[9]+"</td>");
+            let row3 = $("<tr></tr>");
+            row3.append("<th scope='row'>Draws</th>");
+            row3.append("<td>"+str[10]+"</td>");
+            row3.append("<td>"+str[11]+"</td>");
+            row3.append("<td>"+str[12]+"</td>");
+            let row4 = $("<tr></tr>");
+            row4.append("<th scope='row'>Loss</th>");
+            row4.append("<td>"+str[13]+"</td>");
+            row4.append("<td>"+str[14]+"</td>");
+            row4.append("<td>"+str[15]+"</td>");
+            let row5 = $("<tr></tr>");
+            row5.append("<th scope='row'>GOALS</th>");
+            row5.append("<td></td>");
+            row5.append("<td></td>");
+            row5.append("<td></td>");
+            let row6 = $("<tr></tr>");
+            row6.append("<th scope='row'>Goals for</th>");
+            row6.append("<td>"+str[16]+"</td>");
+            row6.append("<td>"+str[17]+"</td>");
+            row6.append("<td>"+str[18]+"</td>");
+            let row7 = $("<tr></tr>");
+            row7.append("<th scope='row'>Goals against</th>");
+            row7.append("<td>"+str[19]+"</td>");
+            row7.append("<td>"+str[20]+"</td>");
+            row7.append("<td>"+str[21]+"</td>");
+            let row8 = $("<tr></tr>");
+            row8.append("<th scope='row'>GOALS AVERAGE</th>");
+            row8.append("<td></td>");
+            row8.append("<td></td>");
+            row8.append("<td></td>");
+            let row9 = $("<tr></tr>");
+            row9.append("<th scope='row'>Goals for</th>");
+            row9.append("<td>"+str[22]+"</td>");
+            row9.append("<td>"+str[23]+"</td>");
+            row9.append("<td>"+str[24]+"</td>");
+            let row10 = $("<tr></tr>");
+            row10.append("<th scope='row'>Goals against</th>");
+            row10.append("<td>"+str[25]+"</td>");
+            row10.append("<td>"+str[26]+"</td>");
+            row10.append("<td>"+str[27]+"</td>");
+            let row11 = $("<tr></tr>");
+            row11.append("<th scope='row'>CLEAN SHEETS</th>");
+            row11.append("<td></td>");
+            row11.append("<td></td>");
+            row11.append("<td></td>");
+            let row12 = $("<tr></tr>");
+            row12.append("<th scope='row'>Clean sheet</th>");
+            row12.append("<td>"+str[28]+"</td>");
+            row12.append("<td>"+str[29]+"</td>");
+            row12.append("<td>"+str[30]+"</td>");
+            let row13 = $("<tr></tr>");
+            row13.append("<th scope='col'>PENALTY</th>");
+            row13.append("<th scope='col'>Scored</th>");
+            row13.append("<th scope='col'>Missed</th>");
+            row13.append("<th scope='col'>Total</th>");
+            let row14 = $("<tr></tr>");
+            row14.append("<th scope='row'>Clean sheet</th>");
+            row14.append("<td>"+str[31]+"</td>");
+            row14.append("<td>"+str[32]+"</td>");
+            row14.append("<td>"+str[33]+"</td>");
+
+
+            table.append(thead);
+            tbody.append(row1);
+            tbody.append(row2);
+            tbody.append(row3);
+            tbody.append(row4);
+            tbody.append(row5);
+            tbody.append(row6);
+            tbody.append(row7);
+            tbody.append(row8);
+            tbody.append(row9);
+            tbody.append(row10);
+            tbody.append(row11);
+            tbody.append(row12);
+            tbody.append(row13);
+            tbody.append(row14);
+            table.append(tbody);
+            $(".drugi").append(div);
+            $(".drugi").append("<br>");
+            $(".drugi").append(table);
+        }
+
+    </script>
+{% endblock %}

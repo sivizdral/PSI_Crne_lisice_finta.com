@@ -1,0 +1,57 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+
+{% block title %}
+    Search team - finta.com
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/team.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="searchfields" style="text-align: center; margin-left: 20%">
+    <form method="post" style="display:flex; justify-content: center">
+        {% csrf_token %}
+        <b style="padding-top:5px; margin-right: 2%; font-size: 18px">Team name:</b>
+        <div class="form-control" style="border:none; width:40%; margin-right:40px; height: 40px;">
+            {{ form.Search }}
+        </div>
+        &nbsp;
+        <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width:20%" type="submit" value="Search">
+    </form>
+    </div>
+    <div class="searchcontent" style="text-align: center">
+        <div class="srccont">
+            {% for i in data %}
+            <table style="margin-left: 10%">
+            <tr>
+                <td style="text-align: left">
+                    <image src="{{ i.logo }}" style="width: 70px;height: 70px;"></image> &nbsp;
+                </td>
+                <td style="text-align: right" class="kolona">
+                   <form method="post" action="{% url "team" %}">
+                       {% csrf_token %}
+                        <label style="font-size: 18px;">{{ i.name }}</label>
+                       <input type="hidden" name="id" value="{{ i.id }}" class="teams">
+                   </form>
+                </td>
+            </tr>
+            </table>
+            <br>
+        {% endfor %}
+        </div>
+
+    </div>
+    <script>
+
+    $(document).ready(function () {
+        $(".teams").hide();
+        $(".kolona").on({
+            'click' : function () {
+                $(this).find('form').submit()
+            }
+        })
+    })
+    </script>
+{% endblock %}
