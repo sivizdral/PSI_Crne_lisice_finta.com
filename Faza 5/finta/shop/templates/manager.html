@@ -24,39 +24,39 @@
                         <div class="interior"></div>
                         <div class="penalty"></div>
 
-                        <div class="gk position primary" id="Goalkeeper"></div>
+                        <div class="gk position primary" id="gk"></div>
 
-                        <div class="sw position" id="Sweeper"></div>
+                        <div class="sw position" id="sw"></div>
 
-                        <div class="lb position" id="Left Full-Back"></div>
-                        <div class="lcb position primary" id="Left Centre-Back"></div>
-                        <div class="cb position" id="Centre-Back"></div>
-                        <div class="rcb position primary" id="Right Centre-Back"></div>
-                        <div class="rb position" id="Right Full-Back"></div>
+                        <div class="lb position" id="lb"></div>
+                        <div class="lcb position primary" id="lcb"></div>
+                        <div class="cb position" id="cb"></div>
+                        <div class="rcb position primary" id="rcb"></div>
+                        <div class="rb position" id="rb"></div>
 
-                        <div class="lwb position primary" id="Left Wing-Back"></div>
-                        <div class="ldm position" id="Left Defensive Midfield"></div>
-                        <div class="cdm position" id="Central Defensive Midfield"></div>
-                        <div class="rdm position" id="Right Defensive Midfield"></div>
-                        <div class="rwb position primary" id="Right Wing-Back"></div>
+                        <div class="lwb position primary" id="lwb"></div>
+                        <div class="ldm position" id="ldm"></div>
+                        <div class="cdm position" id="cdm"></div>
+                        <div class="rdm position" id="rdm"></div>
+                        <div class="rwb position primary" id="rwb"></div>
 
-                        <div class="lm position primary" id="Left Wide Midfield"></div>
-                        <div class="lcm position" id="Left Centre Midfield"></div>
-                        <div class="cm position primary" id="Centre Midfield"></div>
-                        <div class="rcm position" id="Right Centre Midfield"></div>
-                        <div class="rm position primary" id="Right Wide Midfield"></div>
+                        <div class="lm position primary" id="lm"></div>
+                        <div class="lcm position" id="lcm"></div>
+                        <div class="cm position primary" id="cm"></div>
+                        <div class="rcm position" id="rcm"></div>
+                        <div class="rm position primary" id="rm"></div>
 
-                        <div class="lam position primary" id="Left Attacking Midfield"></div>
-                        <div class="cam position" id="Attacking Midfield"></div>
-                        <div class="ram position primary" id="Right Attacking Midfield"></div>
+                        <div class="lam position primary" id="lam"></div>
+                        <div class="cam position" id="cam"></div>
+                        <div class="ram position primary" id="ram"></div>
 
-                        <div class="lw position" id="Left Winger"></div>
-                        <div class="ss position primary" id="Striker"></div>
-                        <div class="rw position" id="Right Winger"></div>
+                        <div class="lw position" id="lw"></div>
+                        <div class="ss position primary" id="ss"></div>
+                        <div class="rw position" id="rw"></div>
 
-                        <div class="ls position" id="Left Centre-Forward"></div>
-                        <div class="cf position" id="Centre-Forward"></div>
-                        <div class="rs position" id="Right Centre-Forward"></div>
+                        <div class="ls position" id="ls"></div>
+                        <div class="cf position" id="cf"></div>
+                        <div class="rs position" id="rs"></div>
                     </div>
                 </div>
             </div>
@@ -78,6 +78,7 @@
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Team</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         {% endif %}
@@ -101,6 +102,9 @@
                                 <td>
                                     <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
                                          height: 50px;" alt="Image" class="rounded-circle">
+                                </td>
+                                <td>
+                                    <input type="button" value="Add">
                                 </td>
                             </tr>
                         {% endfor %}
