@@ -163,6 +163,7 @@ class Player(models.Model):
     position = models.CharField(db_column='Position', max_length=255)  # Field name made lowercase.
     photo = models.CharField(db_column="Photo", max_length=255, default="")
     age = models.IntegerField(db_column="Age", default=0)
+    realid = models.IntegerField(db_column="Id", default=0)
 
     class Meta:
         db_table = 'player'
@@ -173,6 +174,7 @@ class Team(models.Model):
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
     country = models.CharField(db_column='Country', max_length=255)  # Field name made lowercase.
     photo = models.CharField(db_column="Photo", max_length=255, default="")
+    realid = models.IntegerField(db_column="Id", default=0)
 
     class Meta:
         db_table = 'team'
