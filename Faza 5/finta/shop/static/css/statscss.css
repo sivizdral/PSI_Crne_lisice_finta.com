@@ -21,3 +21,7 @@ background: -webkit-linear-gradient(to right, #dab521, #b8c91c, #108f1d, #05b01d
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, #7cff6b, #0a8270);
 }
+
+td:nth-child(3) {
+    background-color:red !important;
+}

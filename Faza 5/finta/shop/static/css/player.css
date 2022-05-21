@@ -1,0 +1,31 @@
+body {
+    background-image: url("../images/ballbg.jpg") !important;
+
+}
+
+.searchfields {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(15px);
+    width: 60%;
+    padding-top: 20px;
+    color: honeydew;
+}
+
+.playercontent {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(15px);
+    width: 100%;
+    color: honeydew;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+
+.col-sm-2 {
+    background-size: 0 !important;
+}
+
+.nav-item > .active {
+    background-color: seagreen !important;
+}
+
+

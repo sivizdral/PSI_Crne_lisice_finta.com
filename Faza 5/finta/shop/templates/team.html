@@ -5,51 +5,55 @@
     Team - finta.com
 {% endblock %}
 
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/teamalone.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div style="margin-top: 10px; text-align: center">
-    <h1>{{ name }}</h1> &nbsp;
+    <div class="searchfields" style="margin-top: 10px; text-align: center;display:flex; justify-content: center">
+    <h1 style="padding-top: 25px">{{ name }}</h1> &nbsp;
     <image src="{{ logo }}" style="width: 100px; height: 100px; border-radius: 50%;"></image>
     </div>
     <br>
-    <div style="text-align: center; width: 100%; background-color: white;">
+    <div style="text-align: center; width: 25%; background: rgba(180, 180, 154, 0.267); backdrop-filter: blur(15px); margin-left:37.5%">
         <ul class="nav nav-pills">
-            <li class="nav-item" id="li2" name="li2">
-                <a class="nav-link active" href="#" id="a2">Stats</a>
+            <li class="nav-item" id="li2" name="li2" style="width:30%;">
+                <a class="nav-link active" href="#" id="a2" style="color: honeydew !important">Stats</a>
             </li>
-            <li class="nav-item" id="li3" name="li3">
-                <a class="nav-link" href="#" id="a3">Players</a>
+            <li class="nav-item" id="li3" name="li3" style="width:40%">
+                <a class="nav-link" href="#" id="a3" style="color: honeydew !important">Players</a>
             </li>
-            <li class="nav-item" id="li1" name="li1">
-                <a class="nav-link" href="#" id="a1">Info</a>
+            <li class="nav-item" id="li1" name="li1" style="width:30%">
+                <a class="nav-link" href="#" id="a1" style="color: honeydew !important">Info</a>
             </li>
         </ul>
     </div>
     <br>
     <div name="info" id="info">
-        <table style="font-size: 25px; border-spacing: 10px; border-collapse: separate;" class="table">
+        <table style="font-size: 18px; border-spacing: 6px; vertical-align: center; " class="table">
             <tr>
-                <th style="text-align: left;">Country </th>
-                <td style="text-align: right;">{{ country }}</td>
+                <th style="text-align: left; padding-left: 15px">Country </th>
+                <td style="text-align: right; padding-right: 15px">{{ country }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">City </th>
-                <td style="text-align: right;">{{ city }}</td>
+                <th style="text-align: left; padding-left: 15px">City </th>
+                <td style="text-align: right;padding-right: 15px">{{ city }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Founded </th>
-                <td style="text-align: right;">{{ founded }}</td>
+                <th style="text-align: left; padding-left: 15px">Founded </th>
+                <td style="text-align: right;padding-right: 15px">{{ founded }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Stadium </th>
-                <td style="text-align: right;">{{ stadion }}</td>
+                <th style="text-align: left; padding-left: 15px">Stadium </th>
+                <td style="text-align: right;padding-right: 15px">{{ stadion }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Stadium capacity </th>
-                <td style="text-align: right;">{{ capacity }}</td>
+                <th style="text-align: left; padding-left: 15px">Stadium capacity </th>
+                <td style="text-align: right;padding-right: 15px">{{ capacity }}</td>
             </tr>
             <tr>
-                <th style="text-align: left;">Coach </th>
-                <td style="text-align: right;">
+                <th style="text-align: left; padding-top: 20px;  padding-left: 15px; border-bottom: 0px !important">Coach </th>
+                <td style="text-align: right;border-bottom: 0px !important;padding-right: 15px">
                     {{ coach }}, {{ nationality }} <img src="{{ coachphoto }}" style="width: 50px; height: 50px;" class="rounded-circle">
                 </td>
             </tr>
@@ -57,8 +61,8 @@
     </div>
     <div id="stats">
         <form name="statsForm" id="statsForm">
-            <div class="dropdown" style="text-align: center;">
-                <select id="selected" class="dropdown" style="width: 200px;" onchange="promeni()">
+            <div class="dropdown" style="text-align: center">
+                <select id="selected" class="dropdown form-select" style="width: 200px; margin-left: 40%" onchange="promeni()">
                     {% for l in stats %}
                         <option value="{{ l.leagueId }} {{ l.leagueLogo }} {{ l.leagueCountry }} {{ l.form }} {{ l.homeplayed }} {{ l.awayplayed }} {{ l.totalplayed }} {{ l.homewins }} {{ l.awaywins }} {{ l.totalwins }} {{ l.homedraws }} {{ l.awaydraws }} {{ l.totaldraws }} {{ l.homeloses }} {{ l.awayloses }} {{ l.totalloses }} {{ l.goalsforhome }} {{ l.goalsforaway }} {{ l.goalsfortotal }} {{ l.goalsagainsthome }} {{ l.goalsagainstaway }} {{ l.goalsagainsttotal }} {{ l.goalsaverageforhome }} {{ l.goalsaverageforaway }} {{ l.goalsaveragefortotal }} {{ l.goalsaverageagainsthome }} {{ l.goalsaverageagainstaway }} {{ l.goalsaverageagainsttotal }} {{ l.cleansheethome }} {{ l.cleansheetaway }} {{ l.cleansheettotal }} {{ l.penaltyscored }} {{ l.penaltymissed }} {{ l.penaltytotal }}">
                             {{ l.leagueName }}
@@ -81,7 +85,7 @@
     <div id="players" style="text-align: center">
         <table class="table" style="text-align: left">
             <tr>
-                <th>
+                <th style="padding-left:15px">
                     Name
                 </th>
                 <th>
@@ -96,7 +100,7 @@
             </tr>
             {% for p in players %}
                 <tr>
-                    <td class="igrac">
+                    <td class="igrac" style="padding-left:15px">
                         <img src="{{ p.playerPhoto }}" style="width: 50px; height: 50px;" class="rounded-circle">
                         {{ p.playerName }}
                     </td>
@@ -105,9 +109,6 @@
                     </td>
                     <td style="vertical-align: middle;">
                         {{ p.playerNumber }}
-                    </td>
-                    <td style="vertical-align: middle;">
-                        {{ p.playerPosition }}
                     </td>
                     <td style="vertical-align: middle;">
                         {{ p.playerAge }}
@@ -180,7 +181,13 @@
             let div = $("<div></div>");
             let h1 = $("<h1></h1>").append($("#selected option:selected").text());
             h1.css({
-                "margin-top": "10px"
+                "margin-top": "10px",
+                "color": "honeydew",
+                "margin-right":"20px"
+            })
+            div.css({
+                "display":"flex",
+                "justify-content":"center"
             })
             div.append(h1);
             div.append("<img src=" + str[1] +"></img>");
@@ -192,7 +199,6 @@
                 'text-align':'center'
             })
             let table = $("<table></table>").addClass("table");
-            table.addClass("table-striped");
             table.css({
                 "margin-bottom": "50px"
             })
