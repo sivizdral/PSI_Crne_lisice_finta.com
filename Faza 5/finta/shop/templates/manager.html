@@ -72,10 +72,11 @@
                 <br/>
                 <table class="text-center" style="margin-left: 100px;">
                     <tr>
+                        <th>POS</th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>NAME</th>
+                        <th>AGE</th>
+                        <th>TEAM</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -83,7 +84,12 @@
                         <tr>
                             <td>{{ player.pos }}</td>
                             {% if player.name == "" %}
-                                <td colspan="5">
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td></td>
+                                <td>
                                     <a href="{% url "manager_players" player.pos %}">
                                         <input type="button" value="Dodaj">
                                     </a>
@@ -96,7 +102,15 @@
                                 <td>{{ player.name }}</td>
                                 <td>{{ player.age }}</td>
                                 <td>{{ player.team }}</td>
-                                <td>{{ player.teamlogo }}</td>
+                                <td>
+                                    <img src="{{ player.teamlogo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
+                                </td>
+                                <td>
+                                    <a href="{% url "manager_player_remove" player.id %}">
+                                        <input type="button" value="Ukloni">
+                                    </a>
+                                </td>
                             {% endif %}
                         </tr>
                     {% endfor %}

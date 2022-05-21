@@ -11,4 +11,5 @@ urlpatterns = [
     path('manager_player_display/<int:id_player>', manager_player_display, name='manager_player_display'),
     path('manager_team_display/<int:id_team>', manager_team_display, name='manager_team_display'),
     path('manager_player_add/<str:position>/<int:id_player>', manager_player_add, name='manager_player_add'),
+    path('manager_player_remove/<int:id_player>', manager_player_remove, name='manager_player_remove'),
 ]

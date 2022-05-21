@@ -94,17 +94,17 @@ def fixtures(request: HttpRequest):
 @login_required(login_url='login')
 def manager(request: HttpRequest):
     players = [
-        {"pos": "GK", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "LWB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "LCB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "RCB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "RWB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "LM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "CM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "RM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "LAM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "RAM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
-        {"pos": "SS", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "GK", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "LWB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "LCB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "RCB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "RWB", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "LM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "CM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "RM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "LAM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "RAM", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"id": "", "pos": "SS", "photo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
     ]
 
     manager_teams = Managerteam.objects.filter(username__exact=request.user.id)
@@ -119,9 +119,12 @@ def manager(request: HttpRequest):
     for i in range(len(managerplays)):
         for j in range(len(players)):
             if managerplays[i].idplayer.position == players[j]["pos"]:
+                players[j]["id"] = managerplays[i].idplayer.idplayer
                 players[j]["photo"] = managerplays[i].idplayer.photo
                 players[j]["name"] = managerplays[i].idplayer.name
                 players[j]["age"] = managerplays[i].idplayer.age
+                players[j]["team"] = managerplays[i].idplayer.idteam.name
+                players[j]["teamlogo"] = managerplays[i].idplayer.idteam.photo
 
     context = {
         "players": players,
@@ -176,10 +179,14 @@ def manager_player_add(request: HttpRequest, position, id_player):
     player = json.loads(conn.getresponse().read())["response"][0]
 
     try:
+        players_team = Team(name=player["statistics"][0]["team"]["name"],
+            country=player["statistics"][0]["team"]["id"],
+            photo=player["statistics"][0]["team"]["logo"])
+        players_team.save()
         manager_player = Player(forename=player["player"]["firstname"], surname=player["player"]["lastname"],
             name=player["player"]["name"], country=player["player"]["birth"]["country"],
             position=position, age=player["player"]["age"], photo=player["player"]["photo"],
-            idteam=Team.objects.get(pk=1))
+            idteam=players_team)
     except:
         manager_player = Player(forename="", surname="", name=player["player"]["name"], country="",
             position=position, age=player["player"]["age"], photo=player["player"]["photo"],
@@ -193,7 +200,10 @@ def manager_player_add(request: HttpRequest, position, id_player):
     return render(request=request, template_name="manager_player_add.html", context={})
 
 
-
+def manager_player_remove(request: HttpRequest, id_player):
+    Managerplays.objects.filter(idplayer__idplayer__exact=id_player).delete()
+    Player.objects.filter(pk=id_player).delete()
+    return render(request=request, template_name="manager_player_remove.html", context={})
 
 
 
