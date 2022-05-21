@@ -9,6 +9,7 @@ from django.views import View
 from django.contrib.auth.models import Group
 from django.http import HttpRequest
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 import os
 import http.client
@@ -88,8 +89,41 @@ def fixtures(request: HttpRequest):
     return render(request=request, template_name="fixtures.html", context=context)
 
 
+@login_required(login_url='login')
 def manager(request: HttpRequest):
+    players = [
+        {"pos": "GK", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "LWB", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "LCB", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "RCB", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "RWB", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "LM", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "CM", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "RM", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "LAM", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "RAM", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+        {"pos": "SS", "logo": "", "name": "", "age": "", "team": "", "teamlogo": "", },
+    ]
+
+    context = {
+        "players": players,
+    }
+    return render(request=request, template_name="manager.html", context=context)
+
+
+def manager_teams(request: HttpRequest, search):
+    context = {
+        "nesto": search,
+    }
+    return render(request=request, template_name="manager_players.html", context=context)
+
+
+
+
+
+def manager_players(request: HttpRequest, position):
     players = None
+
     if request.method == "POST":
         search_name = request.POST.get("player")
         search_team = request.POST.get("player_team")
@@ -104,23 +138,31 @@ def manager(request: HttpRequest):
             players.extend(json.loads(conn.getresponse().read())["response"])
         players = players[:15]
     context = {
+        "position": position,
         "players": players,
     }
-    return render(request=request, template_name="manager.html", context=context)
-
-
-def manager_teams(request: HttpRequest, search):
-    context = {
-        "nesto": search,
-    }
     return render(request=request, template_name="manager_players.html", context=context)
 
 
-def manager_players(request: HttpRequest, search):
-    context = {
-        "nesto": search,
-    }
-    return render(request=request, template_name="manager_players.html", context=context)
+def manager_player_add(request: HttpRequest, position, id_player):
+    print(request.user)
+    print(position)
+    print(id_player)
+    return render(request=request, template_name="manager_player_add.html", context={})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # VECI DEO KODA JE POZAJMLJEN OD KOLJE
