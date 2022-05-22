@@ -164,6 +164,10 @@ class Player(models.Model):
     photo = models.CharField(db_column="Photo", max_length=255, default="")
     age = models.IntegerField(db_column="Age", default=0)
     realid = models.IntegerField(db_column="Id", default=0)
+    offence = models.IntegerField(db_column="Offence", default=0)
+    defence = models.IntegerField(db_column="Defence", default=0)
+    overall = models.IntegerField(db_column="Overall", default=0)
+    value = models.IntegerField(db_column="Value", default=0)
 
     class Meta:
         db_table = 'player'

@@ -122,6 +122,16 @@
                 </table>
             </div>
         </div>
+        <br/>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 text-center">
+                Offence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.offence }}</button>
+                Defence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.defence }}</button>
+                Overall:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.overall }}</button>
+                Value:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.value }}</button>
+            </div>
+        </div>
+        <br/>
         <div class="row">
             <div class="offset-sm-2 col-sm-8 text-center">
                 <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>

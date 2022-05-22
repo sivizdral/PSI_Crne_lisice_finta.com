@@ -131,6 +131,7 @@ def manager(request: HttpRequest):
 
     context = {
         "players": players,
+        "manager_team": manager_team,
     }
     return render(request=request, template_name="manager.html", context=context)
 
@@ -198,7 +199,7 @@ def manager_player_add(request: HttpRequest, position, id_player):
 
     manager_player.save()
 
-    calculate_stats(position, player, manager_team)
+    calculate_stats(position, player, manager_team, manager_player)
 
     managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
     managerplays.save()
@@ -206,7 +207,7 @@ def manager_player_add(request: HttpRequest, position, id_player):
     return render(request=request, template_name="manager_player_add.html", context={})
 
 
-def calculate_stats(position, player, manager_team):
+def calculate_stats(position, player, manager_team, manager_player):
     offence = 0
     defence = 0
     overall = 0
@@ -243,11 +244,25 @@ def calculate_stats(position, player, manager_team):
     manager_team.value += value
     manager_team.save()
 
+    manager_player.offence = offence
+    manager_player.defence = defence
+    manager_player.overall = overall
+    manager_player.value = value
+    manager_player.save()
+
 
 def manager_player_remove(request: HttpRequest, id_player):
     managerplays = Managerplays.objects.filter(idplayer__idplayer__exact=id_player)
     player = Player.objects.get(pk=id_player)
     team = Team.objects.filter(idteam__exact=player.idteam.idteam)
+    managerteam = Managerteam.objects.filter(username__exact=request.user)[0]
+
+    managerteam.offence -= player.offence
+    managerteam.defence -= player.defence
+    managerteam.overall -= player.overall
+    managerteam.value -= player.value
+    managerteam.save()
+
     managerplays.delete()
     player.delete()
     team.delete()
