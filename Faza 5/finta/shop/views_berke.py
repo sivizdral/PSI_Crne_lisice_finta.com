@@ -1,4 +1,5 @@
 import datetime
+import math
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -197,10 +198,50 @@ def manager_player_add(request: HttpRequest, position, id_player):
 
     manager_player.save()
 
+    calculate_stats(position, player, manager_team)
+
     managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
     managerplays.save()
 
     return render(request=request, template_name="manager_player_add.html", context={})
+
+
+def calculate_stats(position, player, manager_team):
+    offence = 0
+    defence = 0
+    overall = 0
+    value = 0
+    try:
+        stats = player["statistics"][0]
+        if position == "LAM" or position == "RAM" or position == "SS":
+            offence += stats["goals"]["total"] * 3
+            offence += stats["goals"]["assists"]
+            offence += math.floor(stats["shots"]["on"] * 10 / stats["shots"]["total"])
+        elif position == "LM" or position == "CM" or position == "RM":
+            offence += math.floor(stats["passes"]["key"] / 10)
+            defence += math.floor(stats["passes"]["total"] / 30)
+        elif position == "LWB" or position == "LCB" or position == "RCB" or position == "RWB":
+            defence += stats["tackles"]["total"]
+            defence += math.floor(stats["duels"]["won"] * 20 / stats["duels"]["total"])
+        elif position == "GK":
+            if stats["goals"]["saves"]:
+                defence += math.floor(stats["goals"]["saves"] / 10)
+            else:
+                defence += 1
+
+        overall += offence + defence - stats["cards"]["yellow"] - stats["cards"]["red"] * 2
+        value += math.floor(stats["games"]["minutes"] / 10)
+    except:
+        offence += 1
+        defence += 1
+        overall += 1
+        value += 10
+
+    manager_team.offence += offence
+    manager_team.defence += defence
+    manager_team.overall += overall
+    manager_team.value += value
+    manager_team.save()
 
 
 def manager_player_remove(request: HttpRequest, id_player):

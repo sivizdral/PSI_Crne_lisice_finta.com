@@ -15,7 +15,7 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 text-center">
+            <div class="offset-sm-2 col-sm-8 text-center">
                 <div class="wrapper">
                     <div class="campo">
                         <div class="semi1"></div>
@@ -60,12 +60,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2 text-center">
-                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 text-center">
+            <div class="offset-sm-2 col-sm-8 text-center">
                 <hr/>
                 <h1>MY TEAM</h1>
                 <hr/>
@@ -123,6 +120,13 @@
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 text-center">
+                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
+                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
+                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
             </div>
         </div>
     </div>
