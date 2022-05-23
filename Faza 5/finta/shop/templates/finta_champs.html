@@ -1,0 +1,22 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+{% block title %}
+Finta championship
+{% endblock %}
+
+{% block links %}
+ <link rel="stylesheet" href="{% static 'css/finta_champs.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            Register for next event: &ensp; &ensp;
+            <button class="btn btn-success">REGISTER</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

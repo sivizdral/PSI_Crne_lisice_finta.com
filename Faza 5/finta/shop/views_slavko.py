@@ -22,3 +22,14 @@ def myprofile(request: HttpRequest):
         "year_joined" : request.user.date_joined.year,
     }
     return render(request, 'myprofile.html', context)
+
+@login_required(login_url='login')
+def finta_champs(request: HttpRequest):
+
+    # championship = Championship.objects.order_by('')
+    # if(len(championship) == 0 or )
+    #
+    context = {
+
+    }
+    return render(request, 'finta_champs.html', context)
