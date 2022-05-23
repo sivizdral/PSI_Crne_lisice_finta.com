@@ -134,9 +134,19 @@
         <br/>
         <div class="row">
             <div class="offset-sm-2 col-sm-8 text-center">
-                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
-                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
-                <a class="btn btn-primary" href="{% url "manager_players" 2 %}">Registruj</a>
+                <form method="post">
+                    {% csrf_token %}
+                    {% if count != 11 %}
+                        <div class="poruka_neuspeh">Treba da imate tacno 11 igraca u timu da biste ga registrovali!</div>
+                        <a id="registruj">
+                            <input type="submit" value="Registruj" disabled>
+                        </a>
+                    {% else %}
+                        <a id="registruj">
+                            <input type="submit" value="Registruj">
+                        </a>
+                    {% endif %}
+                </form><br/>
             </div>
         </div>
     </div>

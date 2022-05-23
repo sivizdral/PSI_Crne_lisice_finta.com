@@ -117,6 +117,7 @@ def manager(request: HttpRequest):
         manager_team.save()
 
     managerplays = Managerplays.objects.filter(idmanagerteam__exact=manager_team)
+    count = 0
     for i in range(len(managerplays)):
         for j in range(len(players)):
             if managerplays[i].idplayer.position == players[j]["pos"]:
@@ -128,10 +129,17 @@ def manager(request: HttpRequest):
                 players[j]["teamlogo"] = managerplays[i].idplayer.idteam.photo
                 players[j]["realplayer"] = managerplays[i].idplayer.realid
                 players[j]["realteam"] = managerplays[i].idplayer.idteam.realid
+                count += 1
+                break
+
+    if request.method == "POST":
+        manager_team.registered = 1
+        manager_team.save()
 
     context = {
         "players": players,
         "manager_team": manager_team,
+        "count": count,
     }
     return render(request=request, template_name="manager.html", context=context)
 
@@ -201,6 +209,9 @@ def manager_player_add(request: HttpRequest, position, id_player):
 
     calculate_stats(position, player, manager_team, manager_player)
 
+    manager_team.count += 1
+    manager_team.save()
+
     managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
     managerplays.save()
 
@@ -226,7 +237,7 @@ def calculate_stats(position, player, manager_team, manager_player):
             defence += math.floor(stats["duels"]["won"] * 20 / stats["duels"]["total"])
         elif position == "GK":
             if stats["goals"]["saves"]:
-                defence += math.floor(stats["goals"]["saves"] / 10)
+                defence += math.floor(stats["goals"]["saves"] * 3 / 4)
             else:
                 defence += 1
 
@@ -261,6 +272,8 @@ def manager_player_remove(request: HttpRequest, id_player):
     managerteam.defence -= player.defence
     managerteam.overall -= player.overall
     managerteam.value -= player.value
+    managerteam.registered = 0
+    managerteam.count -= 1
     managerteam.save()
 
     managerplays.delete()

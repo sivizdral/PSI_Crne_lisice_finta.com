@@ -19,3 +19,13 @@
 table td {
     padding: 10px;
 }
+
+.poruka_neuspeh {
+    font-size: 20px;
+    color: red;
+}
+
+#registruj {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

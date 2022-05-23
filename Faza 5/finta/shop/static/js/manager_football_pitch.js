@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     function inicijalizacija() {
         inicijalizujTeren()
+        inicijalizujOstalo()
     }
 
     function inicijalizujTeren() {
@@ -11,5 +12,7 @@ $(document).ready(function() {
         $(".primary").show()
     }
 
+    function inicijalizujOstalo() {
+    }
 
 })

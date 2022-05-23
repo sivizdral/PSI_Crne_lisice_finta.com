@@ -129,6 +129,8 @@ class Managerteam(models.Model):
     overall = models.IntegerField(db_column='Overall')  # Field name made lowercase.
     rank = models.IntegerField(db_column='Rank')  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
+    registered = models.IntegerField(db_column="Registered", default=0)
+    count = models.IntegerField(db_column="Count", default=0)
 
     class Meta:
         db_table = 'managerteam'
