@@ -6,10 +6,65 @@
 {% endblock %}
 
 {% block links %}
+    <link rel="stylesheet" href={% static "css/manager.css" %}>
 {% endblock %}
 
 {% block content %}
-    HI THERE
-    <br>
-    {{ nesto }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="position_name">
+                </div>
+                <form id="player_form" method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Team" id="player_team" name="player_team"><br/>
+                    <input type="text" placeholder="Player" id="player" name="player"><br/>
+                    <input type="submit" value="Search" id="player_search"><br/>
+                </form>
+                <br/>
+                <div style="float: left; clear:left">
+                    <table style="text-align: center;">
+                        {% if players != None %}
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Team</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        {% endif %}
+                        {% for player in players %}
+                            <tr>
+                                <td>
+                                    <img src="{{ player.player.photo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
+                                </td>
+                                <td>
+                                    <a href="{% url "manager_player_display" player.player.id %}">
+                                        {{ player.player.name }}
+                                    </a>
+                                </td>
+                                <td>{{ player.player.age }}</td>
+                                <td>
+                                    <a href="{% url "manager_team_display" player.statistics.0.team.id %}">
+                                        {{ player.statistics.0.team.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
+                                </td>
+                                <td>
+                                    <a href="{% url "manager_player_add" position player.player.id %}">
+                                        <input type="button" value="Dodaj">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

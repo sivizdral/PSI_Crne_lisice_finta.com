@@ -69,8 +69,10 @@
                   </ul>-->
                 <li><a href="{% url 'teamsearch' %}"><span>Teams</span></a></li>
                 <li><a href="{% url 'stats' %}"><span>Stats</span></a></li>
-                <li><a href="#"><span>Finta Manager</span></a></li>
+
+                <li><a href="{% url 'manager' %}"><span>Finta Manager</span></a></li>
                 <li><a href="{% url 'champs' %}"><span>FintaChamps</span></a></li>
+
                   {% if user.is_authenticated %}
                 <li><a href="#"><span>FintaStore</span></a></li>
                 <li><a href="{% url 'myprofile' %}"><span>My profile</span></a></li>
