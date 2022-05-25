@@ -12,18 +12,22 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="offset-sm-3 col-sm-6">
                 <div id="position_name">
+                </div>
+                <div id="obavestenje">
+                    Pretrazite zeljenog igraca tako sto unesete deo naziva njegovog tima i njegovog imena.
+                    Potrebno je najmanje 4 karaktera bez razmaka za svako polje.
                 </div>
                 <form id="player_form" method="post">
                     {% csrf_token %}
-                    <input type="text" placeholder="Team" id="player_team" name="player_team"><br/>
-                    <input type="text" placeholder="Player" id="player" name="player"><br/>
+                    <input type="text" placeholder="Team" id="player_team" name="player_team" minlength="4"><br/>
+                    <input type="text" placeholder="Player" id="player" name="player" minlength="4"><br/>
                     <input type="submit" value="Search" id="player_search"><br/>
                 </form>
                 <br/>
                 <div style="float: left; clear:left">
-                    <table style="text-align: center;">
+                    <table style="text-align: center; margin-left: 100px;">
                         {% if players != None %}
                             <tr>
                                 <th></th>
