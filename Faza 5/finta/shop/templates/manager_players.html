@@ -41,60 +41,52 @@
                         {% for player in players %}
                             <tr>
                                 <td>
-                                    <img src="{{ player.player.photo }}" style="width: 50px;
+                                    {% if player.player and player.player.photo %}
+                                        <img src="{{ player.player.photo }}" style="width: 50px;
                                          height: 50px;" alt="Image" class="rounded-circle">
-                                </td>
-                                <td>
-                                    <a href="{% url "manager_player_display" player.player.id %}">
-                                        {{ player.player.name }}
-                                    </a>
-                                </td>
-                                <td>{{ player.player.age }}</td>
-                                <td>
-                                    {% if player.statistics %}
-                                        {% if player.statistics.0 %}
-                                            {% if player.statistics.0.team %}
-                                                {% if player.statistics.0.team.id %}
-                                                    <a href="{% url "manager_team_display" player.statistics.0.team.id %}">
-                                                        {{ player.statistics.0.team.name }}
-                                                    </a>
-                                                {% else %}
-                                                    -
-                                                {% endif %}
-                                            {% else %}
-                                                -
-                                            {% endif %}
-                                        {% else %}
-                                            -
-                                        {% endif %}
                                     {% else %}
                                         -
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if player.statistics %}
-                                        {% if player.statistics.0 %}
-                                            {% if player.statistics.0.team %}
-                                                {% if player.statistics.0.team.logo %}
-                                                    <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
-                                         height: 50px;" alt="Image" class="rounded-circle">
-                                                {% else %}
-                                                    -
-                                                {% endif %}
-                                            {% else %}
-                                                -
-                                            {% endif %}
-                                        {% else %}
-                                            -
-                                        {% endif %}
+                                    {% if player.player and player.player.id and player.player.name %}
+                                        <a href="{% url "manager_player_display" player.player.id %}">
+                                            {{ player.player.name }}
+                                        </a>
                                     {% else %}
                                         -
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{% url "manager_player_add" position player.player.id %}">
-                                        <input type="button" value="Add">
-                                    </a>
+                                    {% if player.player and player.player.age %}
+                                        {{ player.player.age }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if player.statistics and player.statistics.0 and player.statistics.0.team and player.statistics.0.team.id and player.statistics.0.team.name %}
+                                        <a href="{% url "manager_team_display" player.statistics.0.team.id %}">
+                                            {{ player.statistics.0.team.name }}
+                                        </a>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if player.statistics and player.statistics.0 and player.statistics.0.team and player.statistics.0.team.logo %}
+                                        <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
+                                         height: 50px;" alt="Image" class="rounded-circle">
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if player.player and player.player.id %}
+                                        <a href="{% url "manager_player_add" position player.player.id %}">
+                                            <input type="button" value="Add">
+                                        </a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
