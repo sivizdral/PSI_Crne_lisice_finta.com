@@ -282,7 +282,35 @@ def manager_player_remove(request: HttpRequest, id_player):
     return render(request=request, template_name="manager_player_remove.html", context={})
 
 
+def manager_standings(request: HttpRequest):
+    data = []
 
+    users = User.objects.all()
+    for u in users:
+        manager_teams = Managerteam.objects.filter(username__exact=u.id)
+        if len(manager_teams) > 0:
+            manager_team = manager_teams[len(manager_teams) - 1]
+        else:
+            manager_team = Managerteam(username=u, offence=0, defence=0, value=0,
+                                       overall=0, rank=0, name=u)
+            manager_team.save()
+
+        data.append({
+            "user": u.username,
+            "players": manager_team.count,
+            "value": manager_team.value,
+            "overall": manager_team.overall,
+        })
+
+    data.sort(key=lambda x: x["overall"], reverse=True)
+
+    data = data[:100]
+
+    context = {
+        "data": data,
+    }
+
+    return render(request=request, template_name="manager_standings.html", context=context)
 
 
 

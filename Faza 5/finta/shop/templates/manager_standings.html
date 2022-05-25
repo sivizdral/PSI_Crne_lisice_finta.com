@@ -1,0 +1,45 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}
+    Manager - finta.com
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/manager_standings.css' %}">
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-sm-5 col-sm-2">
+                <a href="{% url "manager" %}"><input style="margin-left: 50px; width: 120px;" class="btn btn-primary" value="Manager"></a>
+                <br/><br/><br/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8">
+                <table class="table table-striped">
+                    <tr>
+                        <th>User</th>
+                        <th>Players</th>
+                        <th>Value</th>
+                        <th>Overall</th>
+                    </tr>
+                    {% for elem in data %}
+                        <tr>
+                            <td>{{ elem.user }}</td>
+                            <td>{{ elem.players }}</td>
+                            <td>{{ elem.value }}</td>
+                            <td>{{ elem.overall }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -88,7 +88,7 @@
                                 <td></td>
                                 <td>
                                     <a href="{% url "manager_players" player.pos %}">
-                                        <input type="button" value="Dodaj">
+                                        <input type="button" value="Add">
                                     </a>
                                 </td>
                             {% else %}
@@ -113,7 +113,7 @@
                                 </td>
                                 <td>
                                     <a href="{% url "manager_player_remove" player.id %}">
-                                        <input type="button" value="Ukloni">
+                                        <input type="button" value="Remove">
                                     </a>
                                 </td>
                             {% endif %}
@@ -129,6 +129,8 @@
                 Defence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.defence }}</button>
                 Overall:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.overall }}</button>
                 Value:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.value }}</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url "manager_standings" %}"><input style="width: 120px;" class="btn btn-primary" value="Standings"></a>
             </div>
         </div>
         <br/>
