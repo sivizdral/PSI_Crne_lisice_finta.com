@@ -188,33 +188,36 @@ def manager_player_add(request: HttpRequest, position, id_player):
 
     conn.request("GET", "/v3/players?id=" + str(id_player) + "&season=" +
                  str(calculate_current_season()), headers=headers)
-    player = json.loads(conn.getresponse().read())["response"][0]
-
     try:
-        players_team = Team(name=player["statistics"][0]["team"]["name"],
-            country="",
-            photo=player["statistics"][0]["team"]["logo"],
-            realid=player["statistics"][0]["team"]["id"])
-        players_team.save()
-        manager_player = Player(forename=player["player"]["firstname"], surname=player["player"]["lastname"],
-            name=player["player"]["name"], country=player["player"]["birth"]["country"],
-            position=position, age=player["player"]["age"], photo=player["player"]["photo"],
-            idteam=players_team, realid=player["player"]["id"])
+
+        player = json.loads(conn.getresponse().read())["response"][0]
+
+        try:
+            players_team = Team(name=player["statistics"][0]["team"]["name"],
+                country="",
+                photo=player["statistics"][0]["team"]["logo"],
+                realid=player["statistics"][0]["team"]["id"])
+            players_team.save()
+            manager_player = Player(forename=player["player"]["firstname"], surname=player["player"]["lastname"],
+                name=player["player"]["name"], country=player["player"]["birth"]["country"],
+                position=position, age=player["player"]["age"], photo=player["player"]["photo"],
+                idteam=players_team, realid=player["player"]["id"])
+        except:
+            manager_player = Player(forename="", surname="", name=player["player"]["name"], country="",
+                position=position, age=player["player"]["age"], photo=player["player"]["photo"],
+                idteam=Team.objects.get(pk=1), realid=player["player"]["id"])
+
+        manager_player.save()
+
+        calculate_stats(position, player, manager_team, manager_player)
+
+        manager_team.count += 1
+        manager_team.save()
+
+        managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
+        managerplays.save()
     except:
-        manager_player = Player(forename="", surname="", name=player["player"]["name"], country="",
-            position=position, age=player["player"]["age"], photo=player["player"]["photo"],
-            idteam=Team.objects.get(pk=1), realid=player["player"]["id"])
-
-    manager_player.save()
-
-    calculate_stats(position, player, manager_team, manager_player)
-
-    manager_team.count += 1
-    manager_team.save()
-
-    managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
-    managerplays.save()
-
+        pass
     return render(request=request, template_name="manager_player_add.html", context={})
 
 
