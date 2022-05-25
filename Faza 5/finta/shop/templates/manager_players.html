@@ -16,8 +16,8 @@
                 <div id="position_name">
                 </div>
                 <div id="obavestenje">
-                    Pretrazite zeljenog igraca tako sto unesete deo naziva njegovog tima i njegovog imena.
-                    Potrebno je najmanje 4 karaktera bez razmaka za svako polje.
+                    Search for a player by entering part of his team name and his name.<br/>
+                    At least 4 characters in each field without spaces is necessary for advancing further.<br/>
                 </div>
                 <form id="player_form" method="post">
                     {% csrf_token %}
@@ -61,7 +61,7 @@
                                 </td>
                                 <td>
                                     <a href="{% url "manager_player_add" position player.player.id %}">
-                                        <input type="button" value="Dodaj">
+                                        <input type="button" value="Add">
                                     </a>
                                 </td>
                             </tr>
