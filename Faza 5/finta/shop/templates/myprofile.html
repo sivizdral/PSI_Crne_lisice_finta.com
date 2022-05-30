@@ -33,6 +33,26 @@
                 <img src="{% static 'images/coins.png' %}" height="25px" width="25px">
             </span>
         </div>
+        <br>
+         <div>
+         <table>
+            {% for article, link, enum, amount in artLink %}
+                {% if enum  == 0 %}
+                    <tr>
+                {% endif %}
+            <td>
+            <button class="btn" style="height: 90px; width: 90px; background-color: silver">
+                <img height="80%" width="80%" src="{% static link %}">
+                <span class="badge bg-danger">{{ amount }}</span>
+            </button>
+            </td>
+                {% if enum == 1 %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+         </table>
+        </div>
+        <br>
             <div class=" d-flex mt-2">
                 <button class="btn1" style="background-color: #36a31b; color: white">Edit Profile</button>
             </div> <div class="text mt-3">
@@ -44,7 +64,9 @@
 {#                <span><i class="fa fa-instagram"></i></span>#}
 {#                <span><i class="fa fa-linkedin"></i></span>#}
 {#            </div> <div class=" px-2 rounded mt-4 date ">#}
+
             <span class="join">Joined on {{ day_joined }}.{{ month_joined }}.{{ year_joined }}.</span>
+
         </div>
         </div>
     </div>

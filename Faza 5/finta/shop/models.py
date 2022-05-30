@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -66,6 +68,8 @@ class Articletype(models.Model):
 class Championship(models.Model):
     idchampionship = models.AutoField(db_column='idChampionship', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
+    time_started = models.DateTimeField(db_column='TimeStarted', default=datetime.datetime.now())
+    played = models.IntegerField(db_column="played", default=0)
 
     class Meta:
         db_table = 'championship'

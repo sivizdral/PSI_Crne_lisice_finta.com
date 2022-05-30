@@ -1,0 +1,34 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+{% block title %}
+Ranklist
+{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+
+    <a style="color: darkgreen" href="{% url 'champs' %}"> < BACK</a>
+    <table class="table table-bordered table-striped text-center">
+    <tr>
+        <td>Username</td>
+        <td> <img height="30px" width="30px" src="{% static 'images/first.png' %}"> </td>
+        <td> <img height="30px" width="30px" src="{% static 'images/second.png' %}"> </td>
+        <td> <img height="30px" width="30px" src="{% static 'images/third.png' %}"> </td>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user }}</td>
+            <td>{{ user.gold }}</td>
+            <td>{{ user.silver }}</td>
+            <td>{{ user.bronze }}</td>
+        <tr>
+    {% endfor %}
+
+    </table>
+
+
+
+{% endblock %}
