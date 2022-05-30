@@ -162,6 +162,8 @@ def register(request):
             user.password = make_password(password)
             user.first_name = name
             user.last_name = surname
+            user.tokens = 0
+            user.tokens_given = 0
             user.save()
             group = Group.objects.get(name='default')
             user.groups.add(group)

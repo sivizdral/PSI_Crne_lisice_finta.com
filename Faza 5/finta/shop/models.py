@@ -182,8 +182,8 @@ class User(AbstractUser):
     bronze = models.IntegerField(db_column='Bronze', default=0)  # Field name made lowercase.
     appearances = models.IntegerField(db_column='Appearances', default=0)  # Field name made lowercase.
     rank = models.IntegerField(db_column='Rank', default=0)  # Field name made lowercase.
-    profile_picture = models.ImageField(db_column='Profile_picture',upload_to='profile_pictures/', null=True)
-    tokens_given = models.IntegerField(db_column='Tokens_given', default=0);
+    profile_picture = models.ImageField(db_column='Profile_picture', upload_to='profile_pictures/', null=True)
+    tokens_given = models.IntegerField(db_column='Tokens_given', default=0)
 
     class Meta:
         db_table = 'user'
