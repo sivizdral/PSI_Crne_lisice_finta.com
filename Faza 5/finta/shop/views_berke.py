@@ -1,3 +1,6 @@
+# Uros Beric
+# views metodi
+
 import datetime
 import math
 
@@ -36,6 +39,7 @@ fixtures_leagues = {
 }
 
 
+# racunanje trenutne sezone
 def calculate_current_season():
     current_date = datetime.datetime.today().date()
     between_seasons_date = datetime.date(current_date.year, 8, 1)
@@ -45,6 +49,7 @@ def calculate_current_season():
     return current_season
 
 
+# prikaz uzivo rezultata
 def livescores(request):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -59,6 +64,7 @@ def livescores(request):
     return render(request=request, template_name="livescores.html", context=context)
 
 
+# prikaz utakmica
 def fixtures(request: HttpRequest):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -92,6 +98,9 @@ def fixtures(request: HttpRequest):
     return render(request=request, template_name="fixtures.html", context=context)
 
 
+# za Finta Manager stranicu
+# pravi se menadzerski tim
+# prikazuje se menadzerski tim
 @login_required(login_url='login')
 def manager(request: HttpRequest):
     players = [
@@ -144,16 +153,7 @@ def manager(request: HttpRequest):
     return render(request=request, template_name="manager.html", context=context)
 
 
-def manager_teams(request: HttpRequest, search):
-    context = {
-        "nesto": search,
-    }
-    return render(request=request, template_name="manager_players.html", context=context)
-
-
-
-
-
+# prikaz igraca za izbor u tim
 def manager_players(request: HttpRequest, position):
     players = None
 
@@ -177,6 +177,7 @@ def manager_players(request: HttpRequest, position):
     return render(request=request, template_name="manager_players.html", context=context)
 
 
+# dodavanje igraca u tim
 def manager_player_add(request: HttpRequest, position, id_player):
     manager_teams = Managerteam.objects.filter(username__exact=request.user.id)
     if len(manager_teams) > 0:
@@ -221,6 +222,7 @@ def manager_player_add(request: HttpRequest, position, id_player):
     return render(request=request, template_name="manager_player_add.html", context={})
 
 
+# racunanje statistike igraca
 def calculate_stats(position, player, manager_team, manager_player):
     offence = 0
     defence = 0
@@ -265,6 +267,7 @@ def calculate_stats(position, player, manager_team, manager_player):
     manager_player.save()
 
 
+# uklanjanje igraca iz tima
 def manager_player_remove(request: HttpRequest, id_player):
     managerplays = Managerplays.objects.filter(idplayer__idplayer__exact=id_player)
     player = Player.objects.get(pk=id_player)
@@ -285,6 +288,7 @@ def manager_player_remove(request: HttpRequest, id_player):
     return render(request=request, template_name="manager_player_remove.html", context={})
 
 
+# stanje tabele za menadzerske timove
 def manager_standings(request: HttpRequest):
     data = []
 
