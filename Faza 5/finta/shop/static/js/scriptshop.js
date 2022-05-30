@@ -441,21 +441,23 @@ function goToCart(id) {
 
 
 function inputCode(id) {
-    let codeElem = document.getElementById(id);
-    let discountCode = codeElem.innerText;
-    finalValue = totalCartValue;
-    if (discountCode == "ogrizovic") {
-        finalValue = totalCartValue * 0.8;
-    } else if (discountCode == "dp") {
-        finalValue = totalCartValue * 0.7;
-    } else if (discountCode == "tasha") {
-        finalValue = totalCartValue * 0.6;
-    } else if (discountCode == "drazen") {
-        finalValue = totalCartValue * 0.0;
-    } else if (discountCode == "bojic") {
-        finalValue = totalCartValue * 1.5;
+    if (event.key == "Enter") {
+        let codeElem = document.getElementById(id);
+        let discountCode = codeElem.innerText;
+        finalValue = totalCartValue;
+        if (discountCode == "ogrizovic") {
+            finalValue = totalCartValue * 0.8;
+        } else if (discountCode == "dp") {
+            finalValue = totalCartValue * 0.7;
+        } else if (discountCode == "tasha") {
+            finalValue = totalCartValue * 0.6;
+        } else if (discountCode == "drazen") {
+            finalValue = totalCartValue * 0.0;
+        } else if (discountCode == "bojic") {
+            finalValue = totalCartValue * 1.5;
+        }
+        document.getElementById("finalPriceCounter").innerText = "" + finalValue + " tokens";
     }
-    document.getElementById("finalPriceCounter").innerText = "" + finalValue + " tokens";
 }
 
 function checkout() {
@@ -464,6 +466,7 @@ function checkout() {
         document.getElementById("nocash").style.display = "block";
     } else {
         document.getElementById("nocash").style.display = "none";
+        document.getElementById("hiddencartstring").value = cartProducts.join(',');
         document.getElementById("checkoutform").submit();
     }
 }
