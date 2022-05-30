@@ -33,8 +33,6 @@ def shop(request):
     cartstring = request.POST.get('cartinput')
     if not cartstring:
         cartstring = ''
-    request.user.tokens = 200
-    request.user.save()
     cart = cartstring.split(',')
     cart = Article.objects.filter(name__in=cart)
     print('cart ', cart)
@@ -98,7 +96,7 @@ def change_coins(request: HttpRequest):
 
     difference = (end - start).total_seconds()
 
-    need_to_have = int(difference // 60) * 100;
+    need_to_have = int(difference // (60 * 60 * 24)) * 100;
     have = myuser.tokens_given
 
     myuser.tokens_given = need_to_have

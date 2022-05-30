@@ -1,4 +1,8 @@
+# Uros Beric
+# views metodi
+
 import datetime
+import math
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
@@ -9,10 +13,13 @@ from django.views import View
 from django.contrib.auth.models import Group
 from django.http import HttpRequest
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 import os
 import http.client
 import json
+
+from .models import *
 
 conn = http.client.HTTPSConnection("api-football-v1.p.rapidapi.com")
 headers = {
@@ -32,6 +39,7 @@ fixtures_leagues = {
 }
 
 
+# racunanje trenutne sezone
 def calculate_current_season():
     current_date = datetime.datetime.today().date()
     between_seasons_date = datetime.date(current_date.year, 8, 1)
@@ -41,6 +49,7 @@ def calculate_current_season():
     return current_season
 
 
+# prikaz uzivo rezultata
 def livescores(request):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -55,6 +64,7 @@ def livescores(request):
     return render(request=request, template_name="livescores.html", context=context)
 
 
+# prikaz utakmica
 def fixtures(request: HttpRequest):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -88,8 +98,65 @@ def fixtures(request: HttpRequest):
     return render(request=request, template_name="fixtures.html", context=context)
 
 
+# za Finta Manager stranicu
+# pravi se menadzerski tim
+# prikazuje se menadzerski tim
+@login_required(login_url='login')
 def manager(request: HttpRequest):
+    players = [
+        {"id": "", "realplayer": "", "pos": "GK", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "LWB", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "LCB", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "RCB", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "RWB", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "LM", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "CM", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "RM", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "LAM", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "RAM", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+        {"id": "", "realplayer": "", "pos": "SS", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
+    ]
+
+    manager_teams = Managerteam.objects.filter(username__exact=request.user.id)
+    if len(manager_teams) > 0:
+        manager_team = manager_teams[len(manager_teams) - 1]
+    else:
+        manager_team = Managerteam(username=request.user, offence=0, defence=0, value=0,
+                                   overall=0, rank=0, name=request.user)
+        manager_team.save()
+
+    managerplays = Managerplays.objects.filter(idmanagerteam__exact=manager_team)
+    count = 0
+    for i in range(len(managerplays)):
+        for j in range(len(players)):
+            if managerplays[i].idplayer.position == players[j]["pos"]:
+                players[j]["id"] = managerplays[i].idplayer.idplayer
+                players[j]["photo"] = managerplays[i].idplayer.photo
+                players[j]["name"] = managerplays[i].idplayer.name
+                players[j]["age"] = managerplays[i].idplayer.age
+                players[j]["team"] = managerplays[i].idplayer.idteam.name
+                players[j]["teamlogo"] = managerplays[i].idplayer.idteam.photo
+                players[j]["realplayer"] = managerplays[i].idplayer.realid
+                players[j]["realteam"] = managerplays[i].idplayer.idteam.realid
+                count += 1
+                break
+
+    if request.method == "POST":
+        manager_team.registered = 1
+        manager_team.save()
+
+    context = {
+        "players": players,
+        "manager_team": manager_team,
+        "count": count,
+    }
+    return render(request=request, template_name="manager.html", context=context)
+
+
+# prikaz igraca za izbor u tim
+def manager_players(request: HttpRequest, position):
     players = None
+
     if request.method == "POST":
         search_name = request.POST.get("player")
         search_team = request.POST.get("player_team")
@@ -104,23 +171,161 @@ def manager(request: HttpRequest):
             players.extend(json.loads(conn.getresponse().read())["response"])
         players = players[:15]
     context = {
+        "position": position,
         "players": players,
     }
-    return render(request=request, template_name="manager.html", context=context)
-
-
-def manager_teams(request: HttpRequest, search):
-    context = {
-        "nesto": search,
-    }
     return render(request=request, template_name="manager_players.html", context=context)
 
 
-def manager_players(request: HttpRequest, search):
+# dodavanje igraca u tim
+def manager_player_add(request: HttpRequest, position, id_player):
+    manager_teams = Managerteam.objects.filter(username__exact=request.user.id)
+    if len(manager_teams) > 0:
+        manager_team = manager_teams[len(manager_teams) - 1]
+    else:
+        manager_team = Managerteam(username=request.user, offence=0, defence=0, value=0,
+                                   overall=0, rank=0, name=request.user)
+        manager_team.save()
+
+    conn.request("GET", "/v3/players?id=" + str(id_player) + "&season=" +
+                 str(calculate_current_season()), headers=headers)
+    try:
+
+        player = json.loads(conn.getresponse().read())["response"][0]
+
+        try:
+            players_team = Team(name=player["statistics"][0]["team"]["name"],
+                country="",
+                photo=player["statistics"][0]["team"]["logo"],
+                realid=player["statistics"][0]["team"]["id"])
+            players_team.save()
+            manager_player = Player(forename=player["player"]["firstname"], surname=player["player"]["lastname"],
+                name=player["player"]["name"], country=player["player"]["birth"]["country"],
+                position=position, age=player["player"]["age"], photo=player["player"]["photo"],
+                idteam=players_team, realid=player["player"]["id"])
+        except:
+            manager_player = Player(forename="", surname="", name=player["player"]["name"], country="",
+                position=position, age=player["player"]["age"], photo=player["player"]["photo"],
+                idteam=Team.objects.get(pk=1), realid=player["player"]["id"])
+
+        manager_player.save()
+
+        calculate_stats(position, player, manager_team, manager_player)
+
+        manager_team.count += 1
+        manager_team.save()
+
+        managerplays = Managerplays(idmanagerteam=manager_team, idplayer=manager_player)
+        managerplays.save()
+    except:
+        pass
+    return render(request=request, template_name="manager_player_add.html", context={})
+
+
+# racunanje statistike igraca
+def calculate_stats(position, player, manager_team, manager_player):
+    offence = 0
+    defence = 0
+    overall = 0
+    value = 0
+    try:
+        stats = player["statistics"][0]
+        if position == "LAM" or position == "RAM" or position == "SS":
+            offence += stats["goals"]["total"] * 3
+            offence += stats["goals"]["assists"]
+            offence += math.floor(stats["shots"]["on"] * 10 / stats["shots"]["total"])
+        elif position == "LM" or position == "CM" or position == "RM":
+            offence += math.floor(stats["passes"]["key"] / 10)
+            defence += math.floor(stats["passes"]["total"] / 30)
+        elif position == "LWB" or position == "LCB" or position == "RCB" or position == "RWB":
+            defence += stats["tackles"]["total"]
+            defence += math.floor(stats["duels"]["won"] * 20 / stats["duels"]["total"])
+        elif position == "GK":
+            if stats["goals"]["saves"]:
+                defence += math.floor(stats["goals"]["saves"] * 3 / 4)
+            else:
+                defence += 1
+
+        overall += offence + defence - stats["cards"]["yellow"] - stats["cards"]["red"] * 2
+        value += math.floor(stats["games"]["minutes"] / 10)
+    except:
+        offence += 1
+        defence += 1
+        overall += 1
+        value += 10
+
+    manager_team.offence += offence
+    manager_team.defence += defence
+    manager_team.overall += overall
+    manager_team.value += value
+    manager_team.save()
+
+    manager_player.offence = offence
+    manager_player.defence = defence
+    manager_player.overall = overall
+    manager_player.value = value
+    manager_player.save()
+
+
+# uklanjanje igraca iz tima
+def manager_player_remove(request: HttpRequest, id_player):
+    managerplays = Managerplays.objects.filter(idplayer__idplayer__exact=id_player)
+    player = Player.objects.get(pk=id_player)
+    team = Team.objects.filter(idteam__exact=player.idteam.idteam)
+    managerteam = Managerteam.objects.filter(username__exact=request.user)[0]
+
+    managerteam.offence -= player.offence
+    managerteam.defence -= player.defence
+    managerteam.overall -= player.overall
+    managerteam.value -= player.value
+    managerteam.registered = 0
+    managerteam.count -= 1
+    managerteam.save()
+
+    managerplays.delete()
+    player.delete()
+    team.delete()
+    return render(request=request, template_name="manager_player_remove.html", context={})
+
+
+# stanje tabele za menadzerske timove
+def manager_standings(request: HttpRequest):
+    data = []
+
+    users = User.objects.all()
+    for u in users:
+        manager_teams = Managerteam.objects.filter(username__exact=u.id)
+        if len(manager_teams) > 0:
+            manager_team = manager_teams[len(manager_teams) - 1]
+        else:
+            manager_team = Managerteam(username=u, offence=0, defence=0, value=0,
+                                       overall=0, rank=0, name=u)
+            manager_team.save()
+
+        data.append({
+            "user": u.username,
+            "players": manager_team.count,
+            "value": manager_team.value,
+            "overall": manager_team.overall,
+        })
+
+    data.sort(key=lambda x: x["overall"], reverse=True)
+
+    data = data[:100]
+
     context = {
-        "nesto": search,
+        "data": data,
     }
-    return render(request=request, template_name="manager_players.html", context=context)
+
+    return render(request=request, template_name="manager_standings.html", context=context)
+
+
+
+
+
+
+
+
 
 
 # VECI DEO KODA JE POZAJMLJEN OD KOLJE

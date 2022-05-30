@@ -6,10 +6,12 @@ import json
 
 from django.shortcuts import render
 
-from shop.forms_kolja import SearchForm, TeamS
+#Ceo ovaj fajl je napravio Konstantin Benovic 0114/2019
+
+from shop.forms_kolja import SearchForm
 from shop.views_berke import *
 
-
+#funkcija koja otvara html stranicu za odredjeni tim kome je prosledjen id tima
 def team(request):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -116,6 +118,7 @@ def team(request):
 
     return render(request=request, template_name="team.html", context=context)
 
+#funkcija koja otvara html stranicu za pretrazivanje timova po imenu
 def teamsearch(request):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
@@ -151,6 +154,7 @@ def teamsearch(request):
 
     return render(request=request, template_name="searchteam.html", context=context)
 
+#funcija koja otvara html stranicu za pregled pojedinacnog igraca, koji se trazi po svom idu
 def player(request):
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"

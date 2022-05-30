@@ -1,3 +1,6 @@
+<!-- Uros Beric -->
+<!-- Finta Manager stranica -->
+
 {% extends 'header.html' %}
 {% load static %}
 
@@ -15,7 +18,7 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="offset-sm-2 col-sm-8 text-center">
                 <div class="wrapper">
                     <div class="campo">
                         <div class="semi1"></div>
@@ -24,92 +27,131 @@
                         <div class="interior"></div>
                         <div class="penalty"></div>
 
-                        <div class="gk position primary" id="gk"></div>
+                        <div class="gk position primary" id="gk">GK</div>
 
-                        <div class="sw position" id="sw"></div>
+                        <div class="sw position" id="sw">SW</div>
 
-                        <div class="lb position" id="lb"></div>
-                        <div class="lcb position primary" id="lcb"></div>
-                        <div class="cb position" id="cb"></div>
-                        <div class="rcb position primary" id="rcb"></div>
-                        <div class="rb position" id="rb"></div>
+                        <div class="lb position" id="lb">LB</div>
+                        <div class="lcb position primary" id="lcb">LCB</div>
+                        <div class="cb position" id="cb">CB</div>
+                        <div class="rcb position primary" id="rcb">RCB</div>
+                        <div class="rb position" id="rb">RB</div>
 
-                        <div class="lwb position primary" id="lwb"></div>
-                        <div class="ldm position" id="ldm"></div>
-                        <div class="cdm position" id="cdm"></div>
-                        <div class="rdm position" id="rdm"></div>
-                        <div class="rwb position primary" id="rwb"></div>
+                        <div class="lwb position primary" id="lwb">LWB</div>
+                        <div class="ldm position" id="ldm">LDM</div>
+                        <div class="cdm position" id="cdm">CDM</div>
+                        <div class="rdm position" id="rdm">RDM</div>
+                        <div class="rwb position primary" id="rwb">RWB</div>
 
-                        <div class="lm position primary" id="lm"></div>
-                        <div class="lcm position" id="lcm"></div>
-                        <div class="cm position primary" id="cm"></div>
-                        <div class="rcm position" id="rcm"></div>
-                        <div class="rm position primary" id="rm"></div>
+                        <div class="lm position primary" id="lm">LM</div>
+                        <div class="lcm position" id="lcm">LCM</div>
+                        <div class="cm position primary" id="cm">CM</div>
+                        <div class="rcm position" id="rcm">RCM</div>
+                        <div class="rm position primary" id="rm">RM</div>
 
-                        <div class="lam position primary" id="lam"></div>
-                        <div class="cam position" id="cam"></div>
-                        <div class="ram position primary" id="ram"></div>
+                        <div class="lam position primary" id="lam">LAM</div>
+                        <div class="cam position" id="cam">CAM</div>
+                        <div class="ram position primary" id="ram">RAM</div>
 
-                        <div class="lw position" id="lw"></div>
-                        <div class="ss position primary" id="ss"></div>
-                        <div class="rw position" id="rw"></div>
+                        <div class="lw position" id="lw">LW</div>
+                        <div class="ss position primary" id="ss">SS</div>
+                        <div class="rw position" id="rw">RW</div>
 
-                        <div class="ls position" id="ls"></div>
-                        <div class="cf position" id="cf"></div>
-                        <div class="rs position" id="rs"></div>
+                        <div class="ls position" id="ls">LS</div>
+                        <div class="cf position" id="cf">CF</div>
+                        <div class="rs position" id="rs">RS</div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div id="position_name">
-                </div>
-                <form id="player_form" method="post">
-                    {% csrf_token %}
-                    <input type="text" placeholder="Team" id="player_team" name="player_team"><br/>
-                    <input type="text" placeholder="Player" id="player" name="player"><br/>
-                    <input type="submit" value="Search" id="player_search"><br/>
-                </form>
+        </div>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 text-center">
+                <hr/>
+                <h1>MY TEAM</h1>
+                <hr/>
                 <br/>
-                <div style="float: left; clear:left">
-                    <table style="text-align: center;">
-                        {% if players != None %}
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Age</th>
-                                <th>Team</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        {% endif %}
-                        {% for player in players %}
-                            <tr>
+                <table class="text-center" style="margin-left: 100px;">
+                    <tr>
+                        <th>POS</th>
+                        <th></th>
+                        <th>NAME</th>
+                        <th>AGE</th>
+                        <th>TEAM</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for player in players %}
+                        <tr>
+                            <td>{{ player.pos }}</td>
+                            {% if player.name == "" %}
+                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td></td>
                                 <td>
-                                    <img src="{{ player.player.photo }}" style="width: 50px;
+                                    <a href="{% url "manager_players" player.pos %}">
+                                        <input type="button" value="Add">
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <img src="{{ player.photo }}" style="width: 50px;
                                          height: 50px;" alt="Image" class="rounded-circle">
                                 </td>
                                 <td>
-                                    <a href="{% url "manager_player_display" player.player.id %}">
-                                        {{ player.player.name }}
+                                    <a href="{% url "manager_player_display" player.realplayer %}">
+                                        {{ player.name }}
                                     </a>
                                 </td>
-                                <td>{{ player.player.age }}</td>
+                                <td>{{ player.age }}</td>
                                 <td>
-                                    <a href="{% url "manager_team_display" player.statistics.0.team.id %}">
-                                        {{ player.statistics.0.team.name }}
+                                    <a href="{% url "manager_team_display" player.realteam %}">
+                                        {{ player.team }}
                                     </a>
                                 </td>
                                 <td>
-                                    <img src="{{ player.statistics.0.team.logo }}" style="width: 50px;
+                                    <img src="{{ player.teamlogo }}" style="width: 50px;
                                          height: 50px;" alt="Image" class="rounded-circle">
                                 </td>
                                 <td>
-                                    <input type="button" value="Add">
+                                    <a href="{% url "manager_player_remove" player.id %}">
+                                        <input type="button" value="Remove">
+                                    </a>
                                 </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 text-center">
+                Offence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.offence }}</button>
+                Defence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.defence }}</button>
+                Overall:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.overall }}</button>
+                Value:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.value }}</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url "manager_standings" %}"><input style="width: 120px;" class="btn btn-primary" value="Standings"></a>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="offset-sm-2 col-sm-8 text-center">
+                <form method="post">
+                    {% csrf_token %}
+                    {% if count != 11 %}
+                        <div class="poruka_neuspeh">Treba da imate tacno 11 igraca u timu da biste ga registrovali!</div>
+                        <a id="registruj">
+                            <input type="submit" value="Registruj" disabled>
+                        </a>
+                    {% else %}
+                        <a id="registruj">
+                            <input type="submit" value="Registruj">
+                        </a>
+                    {% endif %}
+                </form><br/>
             </div>
         </div>
     </div>

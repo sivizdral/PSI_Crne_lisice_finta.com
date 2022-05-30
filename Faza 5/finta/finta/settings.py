@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fintacom',
         'USER': 'root',
-        'PASSWORD': 'pass123',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }

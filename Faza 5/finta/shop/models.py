@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -66,6 +68,8 @@ class Articletype(models.Model):
 class Championship(models.Model):
     idchampionship = models.AutoField(db_column='idChampionship', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
+    time_started = models.DateTimeField(db_column='TimeStarted', default=datetime.datetime.now())
+    played = models.IntegerField(db_column="played", default=0)
 
     class Meta:
         db_table = 'championship'
@@ -129,6 +133,8 @@ class Managerteam(models.Model):
     overall = models.IntegerField(db_column='Overall')  # Field name made lowercase.
     rank = models.IntegerField(db_column='Rank')  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
+    registered = models.IntegerField(db_column="Registered", default=0)
+    count = models.IntegerField(db_column="Count", default=0)
 
     class Meta:
         db_table = 'managerteam'
@@ -161,6 +167,13 @@ class Player(models.Model):
     idteam = models.ForeignKey('Team', models.DO_NOTHING, db_column='idTeam')  # Field name made lowercase.
     country = models.CharField(db_column='Country', max_length=255)  # Field name made lowercase.
     position = models.CharField(db_column='Position', max_length=255)  # Field name made lowercase.
+    photo = models.CharField(db_column="Photo", max_length=255, default="")
+    age = models.IntegerField(db_column="Age", default=0)
+    realid = models.IntegerField(db_column="Id", default=0)
+    offence = models.IntegerField(db_column="Offence", default=0)
+    defence = models.IntegerField(db_column="Defence", default=0)
+    overall = models.IntegerField(db_column="Overall", default=0)
+    value = models.IntegerField(db_column="Value", default=0)
 
     class Meta:
         db_table = 'player'
@@ -170,6 +183,8 @@ class Team(models.Model):
     idteam = models.AutoField(db_column='idTeam', primary_key=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255)  # Field name made lowercase.
     country = models.CharField(db_column='Country', max_length=255)  # Field name made lowercase.
+    photo = models.CharField(db_column="Photo", max_length=255, default="")
+    realid = models.IntegerField(db_column="Id", default=0)
 
     class Meta:
         db_table = 'team'
