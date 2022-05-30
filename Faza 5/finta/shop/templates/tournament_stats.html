@@ -1,0 +1,67 @@
+{% extends 'header_narrow.html' %}
+{% load static %}
+{% block title %}
+Finta championship
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/tournament_statscss.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <a style="color: darkgreen" href="{% url 'champs' %}"> < BACK</a>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                Championship name: {{ name }}
+                <br>
+                Date started : {{ date }}
+                <br>
+                Participants : {{ cnt }} / 8
+            </div>
+        </div>
+
+        {% if first %}
+            <div class="row text-center">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4" style="font-size: x-large">
+                    <img src="{% static 'images/first.png' %}"><br>
+                    {{ first }}
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        {% endif %}
+        {% if second %}
+            <div class="row text-center">
+                <div class="col-sm-4" style="font-size: x-large">
+                    <img src="{% static 'images/second.png' %}"><br>
+                    {{ second }}
+                </div>
+            <div class="col-sm-4"></div>
+            {% if third %}
+                <div class="col-sm-4" style="font-size: x-large">
+                    <img src="{% static 'images/third.png' %}"><br>
+                    {{ third }}
+                </div>
+            {% else %}
+                <div class="col-sm-4"></div>
+            {% endif %}
+            </div>
+        {% endif %}
+<br>
+        {% if others %}
+            <div class="row">
+                <div class="col-sm-12">
+                    Other participants:<br>
+                    {% for other in others %}
+                        {{ other }} <br>
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
