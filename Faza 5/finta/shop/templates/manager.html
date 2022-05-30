@@ -10,7 +10,8 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/manager_football_pitch.css' %}">
-    <link rel="stylesheet" href="{% static 'css/manager.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+        <link rel="stylesheet" href="{% static 'css/manager.css' %}">
     <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
     <script src="{% static "js/manager_football_pitch.js" %}"></script>
 {% endblock %}
@@ -19,7 +20,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="offset-sm-2 col-sm-8 text-center">
-                <div class="wrapper">
+                <div class="wrapperpitch">
                     <div class="campo">
                         <div class="semi1"></div>
                         <div class="semi2"></div>
@@ -64,13 +65,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row playertable">
             <div class="offset-sm-2 col-sm-8 text-center">
                 <hr/>
-                <h1>MY TEAM</h1>
+                <h1>My Team</h1>
                 <hr/>
                 <br/>
-                <table class="text-center" style="margin-left: 100px;">
+                <table class="text-center">
                     <tr>
                         <th>POS</th>
                         <th></th>
@@ -91,7 +92,7 @@
                                 <td></td>
                                 <td>
                                     <a href="{% url "manager_players" player.pos %}">
-                                        <input type="button" value="Add">
+                                        <input type="button" class="btn btn-success" value="Add">
                                     </a>
                                 </td>
                             {% else %}
@@ -116,7 +117,7 @@
                                 </td>
                                 <td>
                                     <a href="{% url "manager_player_remove" player.id %}">
-                                        <input type="button" value="Remove">
+                                        <input type="button" class="btn btn-danger" value="Remove">
                                     </a>
                                 </td>
                             {% endif %}
@@ -126,29 +127,29 @@
             </div>
         </div>
         <br/>
-        <div class="row">
+        <div class="row teamstats">
             <div class="offset-sm-2 col-sm-8 text-center">
-                Offence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.offence }}</button>
-                Defence:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.defence }}</button>
-                Overall:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.overall }}</button>
-                Value:&nbsp;&nbsp;<button type="button" class="btn btn-primary" disabled>{{ manager_team.value }}</button>
+                Offence:&nbsp;&nbsp;<button type="button" class="btn btn-success" disabled>{{ manager_team.offence }}</button>
+                Defence:&nbsp;&nbsp;<button type="button" class="btn btn-success" disabled>{{ manager_team.defence }}</button>
+                Overall:&nbsp;&nbsp;<button type="button" class="btn btn-success" disabled>{{ manager_team.overall }}</button>
+                Value:&nbsp;&nbsp;<button type="button" class="btn btn-success" disabled>{{ manager_team.value }}</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="{% url "manager_standings" %}"><input style="width: 120px;" class="btn btn-primary" value="Standings"></a>
+                <a href="{% url "manager_standings" %}"><input style="width: 120px; margin-top: 20px" class="btn btn-success" value="Standings"></a>
             </div>
         </div>
         <br/>
-        <div class="row">
+        <div class="row register">
             <div class="offset-sm-2 col-sm-8 text-center">
                 <form method="post">
                     {% csrf_token %}
                     {% if count != 11 %}
                         <div class="poruka_neuspeh">Treba da imate tacno 11 igraca u timu da biste ga registrovali!</div>
                         <a id="registruj">
-                            <input type="submit" value="Registruj" disabled>
+                            <input type="submit" class="btn btn-success" style="margin-top: 20px" value="Registruj" disabled>
                         </a>
                     {% else %}
                         <a id="registruj">
-                            <input type="submit" value="Registruj">
+                            <input type="submit" class="btn btn-success" style="margin-top: 20px" value="Registruj">
                         </a>
                     {% endif %}
                 </form><br/>

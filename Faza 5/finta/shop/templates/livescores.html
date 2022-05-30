@@ -8,6 +8,11 @@
     Livescores - finta.com
 {% endblock %}
 
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/teamalone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+{% endblock %}
+
 {% block content %}
     <div id="wg-api-football-livescore"
          data-host= {{ data_host }}

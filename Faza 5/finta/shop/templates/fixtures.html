@@ -8,6 +8,11 @@
     Fixtures - finta.com
 {% endblock %}
 
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/teamalone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+{% endblock %}
+
 {% block content %}
     <div style="display:flex; width:100%">
         <br/>
@@ -27,7 +32,7 @@
                 <option value="bundesliga">Bundesliga</option>
                 <option value="superliga">Superliga</option>
             </select>
-            <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="width:15%;" type="submit" value="Search">
+            <input class="btn btn-success btn-block fa-lg gradient-custom-2 mb-3" style="width:15%;" type="submit" value="Search">
         </form>
         <br/>
     </div>

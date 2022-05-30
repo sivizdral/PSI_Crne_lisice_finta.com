@@ -3,6 +3,11 @@ Uros Beric
 css za manager.html
  */
 
+body {
+    background-image: url("../images/ballbg.jpg") !important;
+    background-size: 100% !important;
+}
+
 #player {
     margin-left: 50px;
     margin-top: 10px;
@@ -43,4 +48,30 @@ table td {
 
 #player_form {
     padding-left: 150px;
+}
+
+.playertable {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(15px);
+    width: 60%;
+    margin-left: 20%;
+    color: honeydew;
+}
+
+.teamstats, .register {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(15px);
+    width: 60%;
+    margin-left: 20%;
+    color: honeydew;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+a {
+    color: honeydew;
+}
+
+a:hover {
+    color: #1f390c;
 }

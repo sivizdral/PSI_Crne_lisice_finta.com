@@ -4,7 +4,8 @@
 }
 
 body {
-    background-color: #000
+    background-image: url("../images/ballbg.jpg") !important;
+    background-size: 100% !important;
 }
 
 .card {

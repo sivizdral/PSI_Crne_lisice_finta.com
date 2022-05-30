@@ -6,12 +6,13 @@ Finta championship
 
 {% block links %}
     <script src="{% static "js/forChamps.js" %}"></script>
-<link rel="stylesheet" href="{% static 'css/finta_champs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finta_champs.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="container playertable">
      <script type="text/javascript">
         startTimer({{ diff }});
     </script>
@@ -43,9 +44,7 @@ Finta championship
     </div>
   <br>
 
-<div class="row">
-    <div class="col-sm-8">
-    </div>
+<div class="row justify-content-center">
 
     <div class="col-sm-4">
         Click <a style="color: darkgreen" href="{% url 'ranklist' %}">HERE</a> for a ranklist.

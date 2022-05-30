@@ -5,13 +5,15 @@ Ranklist
 {% endblock %}
 
 {% block links %}
-
+    <script src="{% static "js/forChamps.js" %}"></script>
+    <link rel="stylesheet" href="{% static 'css/shopcss.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finta_champs.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <a style="color: darkgreen" href="{% url 'champs' %}"> < BACK</a>
-    <table class="table table-bordered table-striped text-center">
+    <a class="back" style="color: darkgreen" href="{% url 'champs' %}"> < BACK</a>
+    <table class="table playertable">
     <tr>
         <td>Username</td>
         <td> <img height="30px" width="30px" src="{% static 'images/first.png' %}"> </td>
