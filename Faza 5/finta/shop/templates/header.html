@@ -52,25 +52,13 @@
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class=""><a href="{% url 'fixtures' %}"><span>Fixtures</span></a></li>
                 <li class=""><a href="{% url 'livescores' %}"><span>Livescores</span></a></li>
-                <!--<li class="has-children">
-                  <a href="#"><span>Championships</span></a>
-                  <ul class="dropdown arrow-top">
-                    <li><a href="#">Premier League</a></li>
-                    <li><a href="#">Bundesliga</a></li>
-                    <li><a href="#">Superliga</a></li>
-                    <li><a href="#">LaLiga</a></li>
-                    <li><a href="#">Serie A</a></li>
-                    <li><a href="#">Eredivisie</a></li>
-                    <li><a href="#">Ligue 1</a></li>
-                  </ul>
-                </li>-->
                 <li><a href="{% url 'teamsearch' %}"><span>Teams</span></a></li>
                 <li><a href="{% url 'stats' %}"><span>Stats</span></a></li>
                 <li><a href="{% url "manager" %}"><span>Finta Manager</span></a></li>
-                <li><a href="#"><span>FintaChamps</span></a></li>
+                <li><a href="{% url 'champs' %}"><span>FintaChamps</span></a></li>
                   {% if user.is_authenticated %}
                 <li><a href="{% url 'shop' %}"><span>FintaStore</span></a></li>
-                <li><a href="#"><span>My profile</span></a></li>
+                <li><a href="{% url 'myprofile' %}"><span>My profile</span></a></li>
                       <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
                   {% else %}
                       <li><a href="{% url 'login' %}"><span>Login</span></a></li>

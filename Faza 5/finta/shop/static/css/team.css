@@ -1,6 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
 body {
     background-image: url("../images/ballbg.jpg") !important;
-
+    background-size: 100% !important;
 }
 
 .searchfields {

@@ -106,7 +106,7 @@ def finta_champs(request: HttpRequest):
         else:
             championship = lastEvent
 
-    if(needNewChampionship):
+    if(championship == None or needNewChampionship):
         championship = Championship()
         championship.time_started = datetime.datetime.now()
         championship.name = "Championship " + str(championship.time_started.date()) + " - " + str(championship.time_started.hour) + ":" + str(championship.time_started.minute)

@@ -1,6 +1,12 @@
 body {
-    background-image: url("../images/darkbg.jpg") !important;
+    background-image: url("../images/ballbg.jpg") !important;
+    background-size: 100%;
+}
 
+#stats {
+    background: rgba(180, 180, 154, 0.267);
+    backdrop-filter: blur(15px);
+    padding-top: 30px;
 }
 
 .searchfields {
