@@ -24,14 +24,29 @@ from django.http import HttpResponse, HttpRequest
 class Index(View):
 
     def post(self , request):
+        '''
+        Funkcija koja preusmerava pocetni zahtev na stranicu za utakmice
+        :param request:HttpRequest
+        :return:HttpResponseRedirect
+        '''
         return redirect('homepage')
 
     def get(self , request):
+        '''
+        Funkcija koja preusmerava pocetni zahtev na stranicu za utakmice
+        :param request:HttpRequest
+        :return:HttpResponseRedirect
+        '''
         # print()
         return HttpResponseRedirect(f'/fixtures{request.get_full_path()[1:]}')
 
 @login_required(login_url='login')
 def shop(request):
+    '''
+    Funkcija obradjuje zahtev korisnika kada udje u prodavnicu. Korisnik je poziva prvi put kada udje u prodavnicu, ali i kada kupi nesto u njoj.
+    :param request:HttpRequest
+    :return:HttpResponse
+    '''
     cartstring = request.POST.get('cartstr')
     print(cartstring)
     if not cartstring:
@@ -86,6 +101,11 @@ def shop(request):
     return render(request, '../templates/shop.html', data)
 
 def change_coins(request: HttpRequest):
+    '''
+    Funkcija se poziva da bi korisnik na osnovu datuma i logovanja dobio dodatne tokene.
+    :param request: HttpRequest
+    :return: HttpResponse
+    '''
     myuser = User.objects.get(pk = request.user.id)
 
     dateNow = datetime.datetime.now()
@@ -106,6 +126,11 @@ def change_coins(request: HttpRequest):
     myuser.save()
 
 def login_req(request):
+    '''
+    Funckija se poziva kada korisnik pokusa da se uloguje na sistem.
+    :param request: HttpRequest
+    :return: HttpResponse
+    '''
     greska = ""
     if request.method == "POST":
         username = request.POST.get('username')
@@ -127,10 +152,20 @@ def login_req(request):
     return render(request, '../templates/login.html', context)
 
 def logout_req(request):
+    '''
+    Funkcija se poziva kada korisnik zeli da se izloguje iz sistema.
+    :param request: HttpRequest
+    :return: HttpResponse
+    '''
     logout(request)
     return redirect('homepage')
 
 def register(request):
+    '''
+    Funckija se poziva kada korisnik zeli da se registruje na sistem.
+    :param request: HttpRequest
+    :return: HttpResponse
+    '''
     greska = ""
     if request.method == "POST":
         username = request.POST.get('username')
@@ -194,6 +229,11 @@ leagues = {
 }
 
 def stats(request):
+    '''
+    Funckija se poziva kada se korisnik pozicionira na stranicu stats i vraca mu statistike na osnovu njegovog izbora vrednosti.
+    :param request: HttpRequest
+    :return: HttpResponse
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
     data_refresh = "3600"
