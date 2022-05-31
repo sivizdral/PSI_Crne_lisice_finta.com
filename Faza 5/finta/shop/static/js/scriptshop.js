@@ -1,3 +1,5 @@
+/* Ivan Cvetic, 2019/0183 */
+
 // For Filters
 document.addEventListener("DOMContentLoaded", function() {
     var filterBtn = document.getElementById('filter-btn');

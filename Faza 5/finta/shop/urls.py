@@ -1,3 +1,5 @@
+# Ivan Cvetic, 2019/0183
+
 from django.contrib import admin
 from django.urls import path
 from .views import *

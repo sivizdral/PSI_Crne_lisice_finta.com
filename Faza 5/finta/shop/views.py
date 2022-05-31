@@ -1,3 +1,5 @@
+# Ivan Cvetic, 2019/0183
+
 import datetime
 
 from django.contrib.auth import authenticate, login, logout
@@ -26,7 +28,7 @@ class Index(View):
 
     def get(self , request):
         # print()
-        return HttpResponseRedirect(f'/shop{request.get_full_path()[1:]}')
+        return HttpResponseRedirect(f'/fixtures{request.get_full_path()[1:]}')
 
 @login_required(login_url='login')
 def shop(request):
