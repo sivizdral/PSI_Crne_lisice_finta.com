@@ -374,6 +374,7 @@ function loadPage() {
     changeProducts();
     hideSubmits();
     loadPreviousProducts();
+    document.getElementById("hiddencartstring").style.display = "none";
 }
 
 window.onload = loadPage;
@@ -443,23 +444,22 @@ function goToCart(id) {
 
 
 function inputCode(id) {
-    if (event.key == "Enter") {
         let codeElem = document.getElementById(id);
-        let discountCode = codeElem.innerText;
+        let discountCode = codeElem.value;
+
         finalValue = totalCartValue;
         if (discountCode == "ogrizovic") {
             finalValue = totalCartValue * 0.8;
         } else if (discountCode == "dp") {
             finalValue = totalCartValue * 0.7;
         } else if (discountCode == "tasha") {
-            finalValue = totalCartValue * 0.6;
+            finalValue = totalCartValue * 0.4;
         } else if (discountCode == "drazen") {
             finalValue = totalCartValue * 0.0;
         } else if (discountCode == "bojic") {
             finalValue = totalCartValue * 1.5;
         }
         document.getElementById("finalPriceCounter").innerText = "" + finalValue + " tokens";
-    }
 }
 
 function checkout() {
