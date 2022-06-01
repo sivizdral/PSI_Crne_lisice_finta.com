@@ -174,6 +174,8 @@
                             <h5><b>Summary</b></h5>
                         </div>
                         <hr>
+                        <p>GIVE CODE</p> <input type="text" id="code" placeholder="Enter your code">
+                            <button class="btn" onclick="inputCode('code')">CHECK CODE</button>
                         <form method="post" id="checkoutform">
                             {% csrf_token %}
                             <div class="row">
@@ -181,7 +183,7 @@
                                 <div id="itemCounter" class="col" style="padding-left:0;">ITEMS: 0</div>
                                 <div id="totalPriceCounter" class="col text-right">0 tokens</div>
                             </div>
-                            <p>GIVE CODE</p> <input type="text" id="code" placeholder="Enter your code" onkeydown="inputCode(this.id)">
+
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
                             <div id="finalPriceCounter" class="col text-right">0 tokens</div>
