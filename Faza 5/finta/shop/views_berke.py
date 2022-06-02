@@ -1,5 +1,8 @@
 # Uros Beric
 # views metodi
+'''
+UROS BERIC 2019/0051
+'''
 
 import datetime
 import math
@@ -41,6 +44,10 @@ fixtures_leagues = {
 
 # racunanje trenutne sezone
 def calculate_current_season():
+    '''
+    Racunanje trenutne sezone
+    :return: trenutna sezona kao godina (type = int)
+    '''
     current_date = datetime.datetime.today().date()
     between_seasons_date = datetime.date(current_date.year, 8, 1)
     current_season = current_date.year
@@ -51,6 +58,11 @@ def calculate_current_season():
 
 # prikaz uzivo rezultata
 def livescores(request):
+    '''
+    Prikaz uzivo rezultata (utakmice koje se trenutno odigravaju)
+    :param request: HttpRequest
+    :return: render livescores.html stranice
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
     data_refresh = "3600"
@@ -66,6 +78,11 @@ def livescores(request):
 
 # prikaz utakmica
 def fixtures(request: HttpRequest):
+    '''
+    Prikaz utakmica (odigranih, trenutnih i buducih)
+    :param request: HttpRequest
+    :return: render fixtures.html stranice
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
     data_refresh = "3600"
@@ -103,6 +120,11 @@ def fixtures(request: HttpRequest):
 # prikazuje se menadzerski tim
 @login_required(login_url='login')
 def manager(request: HttpRequest):
+    '''
+    Pravljenje i prikaz menadzerskog tima trenutnog korisnika
+    :param request: HttpRequest
+    :return: render manager.html stranice
+    '''
     players = [
         {"id": "", "realplayer": "", "pos": "GK", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
         {"id": "", "realplayer": "", "pos": "LWB", "photo": "", "name": "", "age": "", "realteam": "", "team": "", "teamlogo": "", },
@@ -155,6 +177,12 @@ def manager(request: HttpRequest):
 
 # prikaz igraca za izbor u tim
 def manager_players(request: HttpRequest, position):
+    '''
+    Prikaz igraca za izbor u menadzerski tim pre i nakon pretrage
+    :param request: HttpRequest
+    :param position: zahtevana pozicija igraca (type = str)
+    :return: render manager_plays.html stranice
+    '''
     players = None
 
     if request.method == "POST":
@@ -179,6 +207,13 @@ def manager_players(request: HttpRequest, position):
 
 # dodavanje igraca u tim
 def manager_player_add(request: HttpRequest, position, id_player):
+    '''
+    Dodavanje igraca u tim
+    :param request: HttpRequest
+    :param position: zahtevana pozicija igraca (type = str)
+    :param id_player: identifikator odabranog igraca (type = int)
+    :return: render manager_player_add.html stranice
+    '''
     manager_teams = Managerteam.objects.filter(username__exact=request.user.id)
     if len(manager_teams) > 0:
         manager_team = manager_teams[len(manager_teams) - 1]
@@ -224,6 +259,14 @@ def manager_player_add(request: HttpRequest, position, id_player):
 
 # racunanje statistike igraca
 def calculate_stats(position, player, manager_team, manager_player):
+    '''
+    Racunanje statistike odabranog igraca
+    :param position: zahtevana pozicija igraca (type = str)
+    :param player: odabrani igrac (type = API.player)
+    :param manager_team: menadzerski tim trenutnog korisnika (type = ManagerTeam)
+    :param manager_player: odabrani igrac u bazi (type = Player)
+    :return: None
+    '''
     offence = 0
     defence = 0
     overall = 0
@@ -269,6 +312,12 @@ def calculate_stats(position, player, manager_team, manager_player):
 
 # uklanjanje igraca iz tima
 def manager_player_remove(request: HttpRequest, id_player):
+    '''
+    Uklanjanje izabranog igraca iz menadzerskog tima
+    :param request: HttpRequest
+    :param id_player: identifikator odabranog igraca (type = int)
+    :return: render manager_player_remove.html stranice
+    '''
     managerplays = Managerplays.objects.filter(idplayer__idplayer__exact=id_player)
     player = Player.objects.get(pk=id_player)
     team = Team.objects.filter(idteam__exact=player.idteam.idteam)
@@ -290,6 +339,11 @@ def manager_player_remove(request: HttpRequest, id_player):
 
 # stanje tabele za menadzerske timove
 def manager_standings(request: HttpRequest):
+    '''
+    Prikaz stanja tabele za menadzerske timove postojecih korisnika
+    :param request: HttpRequest
+    :return: render manager_standings.html stranice
+    '''
     data = []
 
     users = User.objects.all()
@@ -331,6 +385,12 @@ def manager_standings(request: HttpRequest):
 # VECI DEO KODA JE POZAJMLJEN OD KOLJE
 # def player in views_kolja.py
 def manager_player_display(request: HttpRequest, id_player):
+    '''
+    Prikaz detalja izabranog igraca
+    :param request: HttpRequest
+    :param id_player: identifikator izabranog igraca (type = int)
+    :return: render player.html stranice
+    '''
     current_season = calculate_current_season()
 
     conn.request("GET", "/v3/players?id=" + str(id_player) + "&season=" + str(current_season), headers=headers)
@@ -392,6 +452,12 @@ def manager_player_display(request: HttpRequest, id_player):
 # VECI DEO KODA JE POZAJMLJEN OD KOLJE
 # def team in views_kolja.py
 def manager_team_display(request: HttpRequest, id_team):
+    '''
+    Prikaz detalja izabranog tima
+    :param request: HttpRequest
+    :param id_team: identifikator izabranog tima (type = int)
+    :return: render team.html stranice
+    '''
     current_season = calculate_current_season()
     conn.request("GET", "/v3/teams?id=" + str(id_team), headers=headers)
     data = json.loads(conn.getresponse().read())
