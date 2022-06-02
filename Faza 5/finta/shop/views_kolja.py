@@ -13,6 +13,11 @@ from shop.views_berke import *
 
 #funkcija koja otvara html stranicu za odredjeni tim kome je prosledjen id tima
 def team(request):
+    '''
+
+    :param request:Httprequest
+    :return: render team.html stranica
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
 
@@ -120,6 +125,11 @@ def team(request):
 
 #funkcija koja otvara html stranicu za pretrazivanje timova po imenu
 def teamsearch(request):
+    '''
+
+    :param request:Httprequest
+    :return: render teamsearch.html stranica
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
 
@@ -156,6 +166,10 @@ def teamsearch(request):
 
 #funcija koja otvara html stranicu za pregled pojedinacnog igraca, koji se trazi po svom idu
 def player(request):
+    '''
+    :param request:Httprequest
+    :return: render player.html stranica
+    '''
     data_host = "api-football-v1.p.rapidapi.com"
     data_key = "ebad167f98mshfc189ed1132c723p189e18jsn516eb7007a02"
     broj = request.POST.get("igrac")
