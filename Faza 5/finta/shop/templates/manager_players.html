@@ -10,12 +10,13 @@
 
 {% block links %}
     <link rel="stylesheet" href={% static "css/manager.css" %}>
+    <link rel="stylesheet" href="{% static 'css/team.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="offset-sm-3 col-sm-6">
+            <div class="offset-sm-3 col-sm-6 searchcontent">
                 <div id="position_name">
                 </div>
                 <div id="obavestenje">
@@ -24,9 +25,9 @@
                 </div>
                 <form id="player_form" method="post">
                     {% csrf_token %}
-                    <input type="text" placeholder="Team" id="player_team" name="player_team" minlength="4"><br/>
-                    <input type="text" placeholder="Player" id="player" name="player" minlength="4"><br/>
-                    <input type="submit" value="Search" id="player_search"><br/>
+                    <input type="text" placeholder="Team" id="player_team" name="player_team" minlength="4" style="width: 50%;"><br/>
+                    <input type="text" placeholder="Player" id="player" name="player" minlength="4" style="width:50%;"><br/>
+                    <input type="submit" class="btn btn-success" value="Search" id="player_search"><br/>
                 </form>
                 <br/>
                 <div style="float: left; clear:left">
@@ -87,7 +88,7 @@
                                 <td>
                                     {% if player.player and player.player.id %}
                                         <a href="{% url "manager_player_add" position player.player.id %}">
-                                            <input type="button" value="Add">
+                                            <input class="btn btn-success" type="button" value="Add">
                                         </a>
                                     {% endif %}
                                 </td>

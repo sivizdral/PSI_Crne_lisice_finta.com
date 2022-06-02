@@ -13,6 +13,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpRequest
 import http.client
 import json
+import re
 
 import os
 
@@ -175,7 +176,6 @@ def register(request):
         confirm = request.POST.get('confirm')
         terms = request.POST.get('terms')
         picture = request.FILES.get('picture')
-        print(picture)
 
         if len(name) == 0:
             greska = "Name cannot be empty!"
@@ -185,6 +185,14 @@ def register(request):
             greska = "Username cannot be empty!"
         elif len(password) == 0:
             greska = "Password cannot be empty!"
+        elif not re.search("[a-z]", password):
+            greska = "Password must contain lowercase letters!"
+        elif not re.search("[A-Z]", password):
+            greska = "Password must contain uppercase letters!"
+        elif not re.search("[0-9]", password):
+            greska = "Password must contain numbers!"
+        elif len(password) < 8:
+            greska = "Password must be at least 8 characters long!"
         elif len(User.objects.filter(username=username)) != 0:
             greska = "This username is already taken!"
         elif password != confirm:
@@ -199,6 +207,7 @@ def register(request):
             user.last_name = surname
             user.tokens = 0
             user.tokens_given = 0
+            user.profile_picture = picture
             user.save()
             group = Group.objects.get(name='default')
             user.groups.add(group)
