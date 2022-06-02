@@ -1,3 +1,5 @@
+//Slavko Krstic 2019/0028
+
 let seconds = 0;
 let handler = null;
 let timeBetween = 1800;

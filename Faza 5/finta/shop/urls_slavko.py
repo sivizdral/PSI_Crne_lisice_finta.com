@@ -1,3 +1,6 @@
+'''
+Slavko Krstic 2019/0028
+'''
 from django.contrib import admin
 from django.urls import path
 from .views_slavko import *

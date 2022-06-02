@@ -1,3 +1,7 @@
+'''
+Slavko Krstic 2019/0028
+'''
+
 import datetime
 import random
 
@@ -17,6 +21,11 @@ import json
 
 @login_required(login_url='login')
 def myprofile(request: HttpRequest):
+    '''
+    Prikaz korisnickog profila trenutno ulogovanog korisnika.
+    :param request: HttpRequest
+    :return: render myprofile.html stranice
+    '''
 
     user = User.objects.get(pk=request.user.id)
     owns = Owns.objects.filter(username=user)
@@ -58,7 +67,12 @@ def myprofile(request: HttpRequest):
     return render(request, 'myprofile.html', context)
 
 def diffTime(time1, time2):
-
+    '''
+    Vraca razliku u sekundama izmedju 2 vremena
+    :param time1: Krajnje vreme
+    :param time2: Pocetno vreme
+    :return: Razlika izmedju vremena
+    '''
     date_1 = f"{time1.day}/{time1.month}/{time1.year} {time1.hour}:{time1.minute}:{time1.second}"
     date_2 = f"{time2.day}/{time2.month}/{time2.year} {time2.hour}:{time2.minute}:{time2.second}"
     date_format_str = '%d/%m/%Y %H:%M:%S'
@@ -69,19 +83,14 @@ def diffTime(time1, time2):
 
     return difference
 
-def timeLeft(time1, time2):
-    date_1 = f"{time1.day}/{time1.month}/{time1.year} {time1.hour}:{time1.minute}:{time1.second}" #now
-    date_2 = f"{time2.day}/{time2.month}/{time2.year} {time2.hour}:{time2.minute}:{time2.second}" #registered
-    date_format_str = '%d/%m/%Y %H:%M:%S'
-    start = datetime.datetime.strptime(date_2, date_format_str)
-    end = datetime.datetime.strptime(date_1, date_format_str)
-
-    difference = (end - start).total_seconds()
-
-    return difference
 
 @login_required(login_url='login')
 def finta_champs(request: HttpRequest):
+    '''
+    Prikazuje stranu sa sampionatom, sa mogucnoscu registrovanja za tekuci sampionat.
+    :param request: HttpRequest
+    :return: render finta_champs.html stranice
+    '''
 
     myUser = User.objects.get(pk=request.user.id)
 
@@ -152,6 +161,13 @@ def finta_champs(request: HttpRequest):
     return render(request, 'finta_champs.html', context)
 
 def playGame(team1 : Managerteam, team2 : Managerteam):
+    '''
+    Igra mec izmedju 2 tima.
+    :param team1: Prvi tim
+    :param team2: Drugi tim
+    :return: Pobednik
+    '''
+
     if(team1 == None): return team2;
     elif(team2 == None): return team1;
 
@@ -163,7 +179,11 @@ def playGame(team1 : Managerteam, team2 : Managerteam):
     return team2
 
 def playChampionship(championship : Championship):
-
+    '''
+    Odigrava se prosledjeni sampionat.
+    :param championship: Sampionat
+    :return: none
+    '''
     participants = Championshipmanagerteam.objects.filter(idchampionship=championship.idchampionship)
 
     for p in participants:
@@ -245,6 +265,12 @@ def playChampionship(championship : Championship):
 
 def seeChampionship(request: HttpRequest, id):
 
+    '''
+    Pregled odigranog sampionata.
+    :param request: HttpRequest
+    :param id: id sampionata
+    :return: render tournament_stats.html stranice
+    '''
     first = None
     second = None
     third = None
@@ -278,10 +304,19 @@ def seeChampionship(request: HttpRequest, id):
     return render(request, 'tournament_stats.html', context)
 
 def champs_register(request: HttpRequest):
+    '''
+    Privremena stranica za redirektovanje na sampionat.
+    :param request: HttpRequest
+    :return: redirect na 'champs'
+    '''
     return redirect('champs')
 
 def ranklist(request: HttpRequest):
-
+    '''
+    Prikaz rang liste korisnika
+    :param request: HttpRequest
+    :return: render ranklist.html stranice
+    '''
     users = User.objects.all()
     users = users.order_by('-gold', '-silver', '-bronze', 'appearances')
     context = {
