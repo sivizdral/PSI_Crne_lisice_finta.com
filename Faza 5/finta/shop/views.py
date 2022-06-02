@@ -176,7 +176,6 @@ def register(request):
         confirm = request.POST.get('confirm')
         terms = request.POST.get('terms')
         picture = request.FILES.get('picture')
-        print(picture)
 
         if len(name) == 0:
             greska = "Name cannot be empty!"
@@ -208,6 +207,7 @@ def register(request):
             user.last_name = surname
             user.tokens = 0
             user.tokens_given = 0
+            user.profile_picture = picture
             user.save()
             group = Group.objects.get(name='default')
             user.groups.add(group)
