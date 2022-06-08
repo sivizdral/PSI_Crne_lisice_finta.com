@@ -1,0 +1,1083 @@
+{
+  "id": "b4b9dd15-cc57-4451-a98c-8f29f8d9a4eb",
+  "version": "2.0",
+  "name": "uros_beric_testovi",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "408ca4c1-b57e-4938-960e-1ec5c9332440",
+    "name": "TP31_igrac_dodat_samo_jednom",
+    "commands": [{
+      "id": "52307fab-a415-45b0-93c8-df25b4e47f8e",
+      "comment": "",
+      "command": "open",
+      "target": "/manager/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7190e618-cb57-4f8d-9002-dfd2902772ad",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "df456b74-1704-47cf-a912-4e33e457d11e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .btn",
+      "targets": [
+        ["css=tr:nth-child(2) .btn", "css:finder"],
+        ["xpath=//input[@value='Add']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f4f5b09-73f3-4932-b3a9-f89d40afe3b8",
+      "comment": "",
+      "command": "click",
+      "target": "id=player_team",
+      "targets": [
+        ["id=player_team", "id"],
+        ["name=player_team", "name"],
+        ["css=#player_team", "css:finder"],
+        ["xpath=//input[@id='player_team']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c575562b-bc2d-45b3-ba0b-27ff0dd8d064",
+      "comment": "",
+      "command": "type",
+      "target": "id=player_team",
+      "targets": [
+        ["id=player_team", "id"],
+        ["name=player_team", "name"],
+        ["css=#player_team", "css:finder"],
+        ["xpath=//input[@id='player_team']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "manc"
+    }, {
+      "id": "c31075e3-ef89-409a-a4f5-02d9722fda5c",
+      "comment": "",
+      "command": "type",
+      "target": "id=player",
+      "targets": [
+        ["id=player", "id"],
+        ["name=player", "name"],
+        ["css=#player", "css:finder"],
+        ["xpath=//input[@id='player']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "david"
+    }, {
+      "id": "a5a12157-ba59-48c3-9943-417fe228ea10",
+      "comment": "",
+      "command": "click",
+      "target": "id=player_search",
+      "targets": [
+        ["id=player_search", "id"],
+        ["css=#player_search", "css:finder"],
+        ["xpath=//input[@id='player_search']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "75773ce6-d14d-4f6a-85fe-e6f40034222a",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .btn",
+      "targets": [
+        ["css=tr:nth-child(2) .btn", "css:finder"],
+        ["xpath=//input[@value='Add']", "xpath:attributes"],
+        ["xpath=//a/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7dfa26cb-022a-4df2-8396-36731e7082a9",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=table.text-center",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "76392a2a-6ccc-4e15-9449-2b40134cb60c",
+    "name": "TP32_nelegalna_registracija",
+    "commands": [{
+      "id": "754079d2-92c2-4e46-bd61-8277e1191ba0",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ee0f6f4-2a0c-48a4-a1a1-ceec4ed897cb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a6116c97-d4a1-4fd3-b095-259562fe94d6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(5) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(5) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[5]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[5]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e133c43-63ae-4add-9d19-f86001110657",
+      "comment": "",
+      "command": "click",
+      "target": "css=form",
+      "targets": [
+        ["css=form", "css:finder"],
+        ["xpath=//form", "xpath:position"],
+        ["xpath=//form[contains(.,'Treba da imate tacno 11 igraca u timu da biste ga registrovali!')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d47d1943-017a-4a99-9994-80858f5c8a24",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.poruka_neuspeh",
+      "targets": [],
+      "value": "Treba da imate tacno 11 igraca u timu da biste ga registrovali!"
+    }]
+  }, {
+    "id": "0e437f5b-ebd2-419e-bbba-c9dffbbd3eab",
+    "name": "TP33_legalna_registracija",
+    "commands": [{
+      "id": "4d5647e6-5a12-4c40-b5a8-7be602dff399",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "32a9bd8b-2403-4853-a3be-2b5e80fcf894",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "720cc8aa-3126-408e-b6ef-c474e5c4e45b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(5) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(5) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[5]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[5]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39050ff1-40c5-4bf9-9f39-a189f46aef8a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#registruj > .btn",
+      "targets": [
+        ["css=#registruj > .btn", "css:finder"],
+        ["xpath=//input[@value='Registruj']", "xpath:attributes"],
+        ["xpath=//a[@id='registruj']/input", "xpath:idRelative"],
+        ["xpath=//form/a/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "78f67b44-5305-43c7-a7b5-d555e5508a99",
+      "comment": "",
+      "command": "verifyElementNotPresent",
+      "target": "css=.poruka_neuspeh",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "ca4037c2-0c13-4498-b62f-73b191dbcffc",
+    "name": "TP30_ponovno_dodavanje_istog",
+    "commands": [{
+      "id": "bbf64b9a-999a-406e-996d-15104ce4d8bc",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7c1a7a48-555f-4044-bf72-dbaea854579f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "63fb9326-d7ba-4299-be84-64fe4843a092",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(5) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(5) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[5]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[5]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "159bcd68-89fe-4d53-b911-56a2db69495c",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1) > .btn-success",
+      "targets": [
+        ["css=a:nth-child(1) > .btn-success", "css:finder"],
+        ["xpath=//input[@value='Add']", "xpath:attributes"],
+        ["xpath=//tr[12]/td[7]/a/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fd96800-51a7-4899-b6c0-84a6bfce04ed",
+      "comment": "",
+      "command": "click",
+      "target": "id=player_team",
+      "targets": [
+        ["id=player_team", "id"],
+        ["name=player_team", "name"],
+        ["css=#player_team", "css:finder"],
+        ["xpath=//input[@id='player_team']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0213d91e-3d77-4b1b-99b9-22fcaca8875c",
+      "comment": "",
+      "command": "type",
+      "target": "id=player_team",
+      "targets": [
+        ["id=player_team", "id"],
+        ["name=player_team", "name"],
+        ["css=#player_team", "css:finder"],
+        ["xpath=//input[@id='player_team']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "manc"
+    }, {
+      "id": "c481e358-c8bd-4704-ab36-2aba514e67f4",
+      "comment": "",
+      "command": "type",
+      "target": "id=player",
+      "targets": [
+        ["id=player", "id"],
+        ["name=player", "name"],
+        ["css=#player", "css:finder"],
+        ["xpath=//input[@id='player']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "david"
+    }, {
+      "id": "e115fbcf-1b63-4d3b-81ee-273a8721874c",
+      "comment": "",
+      "command": "click",
+      "target": "id=player_search",
+      "targets": [
+        ["id=player_search", "id"],
+        ["css=#player_search", "css:finder"],
+        ["xpath=//input[@id='player_search']", "xpath:attributes"],
+        ["xpath=//form[@id='player_form']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "88cbf469-7629-4489-b4fb-a8da60ad33da",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .btn",
+      "targets": [
+        ["css=tr:nth-child(2) .btn", "css:finder"],
+        ["xpath=//input[@value='Add']", "xpath:attributes"],
+        ["xpath=//a/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d54e0ab0-bc93-40e5-ae7e-ac34260b87db",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.playertable",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "dd95187d-a22d-449d-b5cb-db921434e85b",
+    "name": "TP35_legalna_registracija_sampionat",
+    "commands": [{
+      "id": "593ee798-8e77-4322-a4c9-825990907e02",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "30f78e8e-9c13-4dc1-8f34-74a9996ffdd8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9c1065ed-c3a7-4c0c-bba1-e06d6e4dac79",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(6) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(6) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[6]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[6]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7af84000-415e-4145-8182-aa316e363fd2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'REGISTER')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8730d36a-1503-42eb-9b0e-7dca0b883460",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.btn-success",
+      "targets": [],
+      "value": "ALREADY REGISTERED"
+    }]
+  }, {
+    "id": "87447bb4-581a-4a26-b990-47e55e38a607",
+    "name": "TP34_nelegalna_registracija_sampionat",
+    "commands": [{
+      "id": "991e564b-d793-4414-a304-0a164c0fcd65",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "09a3d6c7-77f2-4cd1-9648-4767c9403d32",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x840",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "005ad5f8-de14-4d8b-b918-9bd5fe8a6168",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(6) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(6) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[6]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[6]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7543664-b689-4c71-8ac3-45979182f709",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'REGISTER')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b18197da-b76d-4f4b-8db6-6efa1e7f3f89",
+      "comment": "",
+      "command": "verifyNotText",
+      "target": "css=.btn-success",
+      "targets": [],
+      "value": "ALREADY REGISTERED"
+    }]
+  }, {
+    "id": "bc531483-862e-45b3-9d93-730b481d9af0",
+    "name": "TP36_registracija_na_trenutni_sampionat",
+    "commands": [{
+      "id": "f7928de1-3823-42da-ba27-bf2a5fa5d92e",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00a98154-201a-4075-a4b1-832d0d275170",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8fd5f866-f601-4b3a-8880-c694dc82dc2e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(6) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(6) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[6]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[6]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1f6a6c0-4ef7-4442-8c17-a7050e27fb75",
+      "comment": "",
+      "command": "click",
+      "target": "css=form",
+      "targets": [
+        ["css=form", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c776d0a4-cfc8-4873-bc7b-3fbbdcb9dfef",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.btn-success",
+      "targets": [],
+      "value": "ALREADY REGISTERED"
+    }]
+  }, {
+    "id": "1aec5dad-99a9-4179-9653-a186b3f2c411",
+    "name": "TP37_registracija_na_završen_šampionat",
+    "commands": [{
+      "id": "380a1e76-fb25-4595-95b9-18d54f6d7f23",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d8f25f57-ecd9-4dae-860f-63e7c6d78cd9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1f3301da-9389-4fa1-8bbc-251e0c4d370e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(6) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(6) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[6]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[6]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7c7166cd-8d7c-4c40-9169-70a2d3f8bfda",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1) > li",
+      "targets": [
+        ["css=a:nth-child(1) > li", "css:finder"],
+        ["xpath=//a/li", "xpath:position"],
+        ["xpath=//li[contains(.,'Championship 2022-06-02 - 14:50')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b3c2a885-dcaf-4f0c-ad52-4f518f24f2f1",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.playertable",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "93b3bce9-3b81-44c9-b27b-d4a88a0574f2",
+    "name": "TP38_filtriranje_bez_odabira",
+    "commands": [{
+      "id": "fd4db2be-d48f-43f8-beed-49a3156cbaf4",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e53989d2-7bf5-4161-80dc-323568e1d231",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9443628-c312-4496-9f40-e13991cb99af",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfb9b6ae-4be2-4ef6-95b8-05b6a4b76c08",
+      "comment": "",
+      "command": "click",
+      "target": "id=apply",
+      "targets": [
+        ["id=apply", "id"],
+        ["css=#apply", "css:finder"],
+        ["xpath=//label[@id='apply']", "xpath:attributes"],
+        ["xpath=//div[@id='filterbar']/div/div/div/label[2]", "xpath:idRelative"],
+        ["xpath=//label[2]", "xpath:position"],
+        ["xpath=//label[contains(.,' Apply')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3aa82ef-202f-4392-b9b7-aba6312590fe",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=products",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "1e3bf60d-1fef-46f0-9edd-863a9cfc1716",
+    "name": "TP39_filtriranje_sa_odabirom",
+    "commands": [{
+      "id": "26395a9c-3afd-4b9a-9e94-333b27043db8",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e474190e-5f44-4cfc-b542-da2cbe23329c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e5d90278-b96a-43b6-85b1-ee14b3a541a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dcc1bfc8-02f6-4974-862e-7ff823e34251",
+      "comment": "",
+      "command": "click",
+      "target": "css=#leagueName1 > .check",
+      "targets": [
+        ["css=#leagueName1 > .check", "css:finder"],
+        ["xpath=//label[@id='leagueName1']/span", "xpath:idRelative"],
+        ["xpath=//label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b0ffc965-7656-4ac4-a688-b2f0e798dac2",
+      "comment": "",
+      "command": "click",
+      "target": "css=#leagueName2 > .check",
+      "targets": [
+        ["css=#leagueName2 > .check", "css:finder"],
+        ["xpath=//label[@id='leagueName2']/span", "xpath:idRelative"],
+        ["xpath=//div[2]/label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60af1891-ed84-41db-a5c7-cb53eea119e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=#typeName5 > .check",
+      "targets": [
+        ["css=#typeName5 > .check", "css:finder"],
+        ["xpath=//label[@id='typeName5']/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/div[5]/label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f2afeb2-0121-4466-87d4-caff314fe7f6",
+      "comment": "",
+      "command": "click",
+      "target": "id=apply",
+      "targets": [
+        ["id=apply", "id"],
+        ["css=#apply", "css:finder"],
+        ["xpath=//label[@id='apply']", "xpath:attributes"],
+        ["xpath=//div[@id='filterbar']/div/div/div/label[2]", "xpath:idRelative"],
+        ["xpath=//label[2]", "xpath:position"],
+        ["xpath=//label[contains(.,' Apply')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "56a13445-a809-4fec-ba2a-21ba40edb387",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=products",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "2a3eeeea-b82e-4ab4-96b3-dcc21652efea",
+    "name": "TP40_kupovina_nicega",
+    "commands": [{
+      "id": "25e64477-d9f5-41c5-89d5-5c00dad5d5ff",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "335a0315-b6d2-451d-bfb6-6a91cec98bbb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1204f194-16d5-4b00-a0b4-551c65581df7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca860ae8-3a87-4004-8cca-79c0a43970b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=gotocart",
+      "targets": [
+        ["id=gotocart", "id"],
+        ["css=#gotocart", "css:finder"],
+        ["xpath=//span[@id='gotocart']", "xpath:attributes"],
+        ["xpath=//div[@id='mynav']/ul/li/button/span", "xpath:idRelative"],
+        ["xpath=//li/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f213bf94-4a32-41fe-91ea-0bb7a64a1fa4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(7)",
+      "targets": [
+        ["css=.btn:nth-child(7)", "css:finder"],
+        ["xpath=//button[@onclick='checkout()']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'CHECKOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "726cc075-fafa-40c4-a877-111de1a70564",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=products",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "eb8ac414-0e49-4997-80aa-0cb2aa889e47",
+    "name": "TP41_kupovina_bez_novca",
+    "commands": [{
+      "id": "cf5c241b-d200-487b-9648-e20b6f6320d8",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fecfec6b-8b62-4ab1-881a-7e783de810d0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "92335d14-ec6c-4f1d-924f-0c2ea7a06d0c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09139e2e-6969-4412-b870-509b27f48edf",
+      "comment": "",
+      "command": "click",
+      "target": "css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons",
+      "targets": [
+        ["css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons", "css:finder"],
+        ["xpath=//div[@id='buy1. FC Union Berlin']/i", "xpath:idRelative"],
+        ["xpath=//i", "xpath:position"],
+        ["xpath=//i[contains(.,'add_shopping_cart')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "452aa036-7cd5-45eb-9169-70c36ae64ad0",
+      "comment": "",
+      "command": "click",
+      "target": "id=gotocart",
+      "targets": [
+        ["id=gotocart", "id"],
+        ["css=#gotocart", "css:finder"],
+        ["xpath=//span[@id='gotocart']", "xpath:attributes"],
+        ["xpath=//div[@id='mynav']/ul/li/button/span", "xpath:idRelative"],
+        ["xpath=//li/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "49bd18d5-d46a-48ee-b342-2aae1616bbee",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(7)",
+      "targets": [
+        ["css=.btn:nth-child(7)", "css:finder"],
+        ["xpath=//button[@onclick='checkout()']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'CHECKOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "11a565a0-b65b-4d91-ae34-cfea9da94af2",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=nocash",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "4e61a297-fca4-4b2f-a632-3d862e7d1d4e",
+    "name": "TP42_ispravna_kupovina",
+    "commands": [{
+      "id": "cc07edde-3dd0-4af9-854b-8d4bc61cdd66",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e40865bc-1070-4580-bab0-9e221bf1f16d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "99ccaddb-bee1-4620-ac0e-7ac28e18c16d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2606bfaf-c6cf-4a9a-8133-af675062a3d6",
+      "comment": "",
+      "command": "click",
+      "target": "css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons",
+      "targets": [
+        ["css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons", "css:finder"],
+        ["xpath=//div[@id='buy1. FC Union Berlin']/i", "xpath:idRelative"],
+        ["xpath=//i", "xpath:position"],
+        ["xpath=//i[contains(.,'add_shopping_cart')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f2502cf4-6608-4824-be66-bd55d44ab49c",
+      "comment": "",
+      "command": "click",
+      "target": "id=gotocart",
+      "targets": [
+        ["id=gotocart", "id"],
+        ["css=#gotocart", "css:finder"],
+        ["xpath=//span[@id='gotocart']", "xpath:attributes"],
+        ["xpath=//div[@id='mynav']/ul/li/button/span", "xpath:idRelative"],
+        ["xpath=//li/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee3b3fd7-d231-49ed-932d-64cdce48ba7b",
+      "comment": "",
+      "command": "click",
+      "target": "id=code",
+      "targets": [
+        ["id=code", "id"],
+        ["css=#code", "css:finder"],
+        ["xpath=//input[@id='code']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf0ee083-de39-4022-9a87-db41644173a8",
+      "comment": "",
+      "command": "type",
+      "target": "id=code",
+      "targets": [
+        ["id=code", "id"],
+        ["css=#code", "css:finder"],
+        ["xpath=//input[@id='code']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "tasha"
+    }, {
+      "id": "9f28b106-f3fd-4c32-b83f-10fde58a8415",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(5)",
+      "targets": [
+        ["css=.btn:nth-child(5)", "css:finder"],
+        ["xpath=//button[@onclick=\"inputCode('code')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'CHECK CODE')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "29fe1c0f-3921-4e5c-8bf7-de05d5b53f5c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(7)",
+      "targets": [
+        ["css=.btn:nth-child(7)", "css:finder"],
+        ["xpath=//button[@onclick='checkout()']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'CHECKOUT')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "328b577a-90af-4656-92a4-f69ac70adf8c",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=products",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "013974d9-ed82-4655-bfd4-f16f64b7e140",
+    "name": "TP43_neispravan_kod_za_popust",
+    "commands": [{
+      "id": "28c605b0-89cd-4800-99da-91deb9dfd9bf",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e0e3a84-c27c-406a-98e5-d027d7f9e7dd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8bb68b2e-6fe6-4e90-9a1c-425828c6b360",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f93b33f-ee16-4572-82a7-7af77df42403",
+      "comment": "",
+      "command": "click",
+      "target": "css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons",
+      "targets": [
+        ["css=#buy1\\.\\ FC\\ Union\\ Berlin > .material-icons", "css:finder"],
+        ["xpath=//div[@id='buy1. FC Union Berlin']/i", "xpath:idRelative"],
+        ["xpath=//i", "xpath:position"],
+        ["xpath=//i[contains(.,'add_shopping_cart')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8763f090-611b-4a35-83ca-f9b29ce58fdf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-cart",
+      "targets": [
+        ["css=.btn-cart", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='mynav']/ul/li/button", "xpath:idRelative"],
+        ["xpath=//li/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "748dcdc7-2556-4709-9f7f-de2c69a3c1af",
+      "comment": "",
+      "command": "click",
+      "target": "id=gotocart",
+      "targets": [
+        ["id=gotocart", "id"],
+        ["css=#gotocart", "css:finder"],
+        ["xpath=//span[@id='gotocart']", "xpath:attributes"],
+        ["xpath=//div[@id='mynav']/ul/li/button/span", "xpath:idRelative"],
+        ["xpath=//li/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3926734a-dc2c-464b-9970-f97d7c445297",
+      "comment": "",
+      "command": "click",
+      "target": "id=code",
+      "targets": [
+        ["id=code", "id"],
+        ["css=#code", "css:finder"],
+        ["xpath=//input[@id='code']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "beb73281-8273-457f-b1c8-50b9dfda5563",
+      "comment": "",
+      "command": "type",
+      "target": "id=code",
+      "targets": [
+        ["id=code", "id"],
+        ["css=#code", "css:finder"],
+        ["xpath=//input[@id='code']", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "jocke"
+    }, {
+      "id": "44e5d0da-a04d-4928-957d-6482a8409890",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(5)",
+      "targets": [
+        ["css=.btn:nth-child(5)", "css:finder"],
+        ["xpath=//button[@onclick=\"inputCode('code')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='shoppingcart']/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'CHECK CODE')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7454f0fc-f68c-4a98-9df3-d8f28d55d163",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=finalPriceCounter",
+      "targets": [],
+      "value": "50 tokens"
+    }]
+  }, {
+    "id": "0c6b5b0f-7a31-48c7-9816-1f8c7ebf552b",
+    "name": "TP44_reset_filtera",
+    "commands": [{
+      "id": "f3a81af3-d2ac-4ec4-b0bd-6db433ccc534",
+      "comment": "",
+      "command": "open",
+      "target": "/fixtures/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f318cb0-9ba4-47ad-8bce-4744c8051a85",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x824",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57d0ba7b-c950-4287-b731-28ab53093a3b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.site-menu > li:nth-child(7) span",
+      "targets": [
+        ["css=.site-menu > li:nth-child(7) span", "css:finder"],
+        ["xpath=//div[@id='headerrow']/header/div/div/div[2]/nav/ul/li[7]/a/span", "xpath:idRelative"],
+        ["xpath=//nav/ul/li[7]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5fc201a-ca01-4bb7-9e53-523adea09e48",
+      "comment": "",
+      "command": "click",
+      "target": "css=#leagueName2 > .check",
+      "targets": [
+        ["css=#leagueName2 > .check", "css:finder"],
+        ["xpath=//label[@id='leagueName2']/span", "xpath:idRelative"],
+        ["xpath=//div[2]/label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30152778-fca0-4919-a055-e3323a4c9ebc",
+      "comment": "",
+      "command": "click",
+      "target": "id=apply",
+      "targets": [
+        ["id=apply", "id"],
+        ["css=#apply", "css:finder"],
+        ["xpath=//label[@id='apply']", "xpath:attributes"],
+        ["xpath=//div[@id='filterbar']/div/div/div/label[2]", "xpath:idRelative"],
+        ["xpath=//label[2]", "xpath:position"],
+        ["xpath=//label[contains(.,' Apply')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "33227373-d55b-4d23-8305-6c9f6c2454de",
+      "comment": "",
+      "command": "click",
+      "target": "id=reset",
+      "targets": [
+        ["id=reset", "id"],
+        ["css=#reset", "css:finder"],
+        ["xpath=//label[@id='reset']", "xpath:attributes"],
+        ["xpath=//div[@id='filterbar']/div/div/div/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,' Reset')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "52edb76e-e567-443e-b75f-5fba117962f3",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "id=products",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "d26c3101-2cf9-4902-91ee-c84372e14a92",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["408ca4c1-b57e-4938-960e-1ec5c9332440"]
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
