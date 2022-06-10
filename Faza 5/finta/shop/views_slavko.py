@@ -98,7 +98,7 @@ def finta_champs(request: HttpRequest):
     message = "get"
 
     needNewChampionship = False
-    difference = 0;
+    difference = 0
     championship = None
 
     registered = False;
